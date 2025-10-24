@@ -25,7 +25,7 @@ const malla = {
   ],
   "Cuarto semestre":[
     { nombre:"Lengua Extranjera IV", prerequisitos:["Lengua Extranjera III"] },
-    { nombre:"Responsabilidad Social Universitaria", prerequisitos:["Formación Ética para el Desarrollo Sostenible"] },
+    { nombre:"Responsabilidad Social Universitaria" },
     { nombre:"Gestión del Cuidado en Enfermería IV", prerequisitos:["Gestión del Cuidado en Enfermería III","Práctica Integrada en Enfermería III"] },
     { nombre:"Enfermería en Salud Pública y Determinantes Sociales", prerequisitos:["Matemáticas y Herramientas Informáticas para la Gestión en Salud"] },
     { nombre:"Integrado Fisiología, Fisiopatología y Farmacología en Enfermería II", prerequisitos:["Integrado Fisiología, Fisiopatología y Farmacología en Enfermería I"] },
@@ -78,7 +78,7 @@ const malla = {
 const aprobados = new Set();
 
 function puedeDesbloquear(prerequisitos){
-  return (prerequisitos || []).every(p=>aprobados.has(p));
+  return (prerequisitos||[]).every(p=>aprobados.has(p));
 }
 
 function actualizarEstadoRamos(){
@@ -100,8 +100,8 @@ function actualizarEstadoRamos(){
 
 function crearMalla(){
   const cont = document.getElementById("malla-container");
-  cont.innerHTML = "";
-  for(const [semestre, ramos] of Object.entries(malla)){
+  cont.innerHTML="";
+  for(const [semestre,ramos] of Object.entries(malla)){
     const divS = document.createElement("div");
     divS.className="semestre";
     divS.innerHTML=`<h2>${semestre}</h2>`;
@@ -113,11 +113,8 @@ function crearMalla(){
       divR.dataset.prerequisitos=JSON.stringify(r.prerequisitos||[]);
       divR.addEventListener("click",()=>{
         if(puedeDesbloquear(r.prerequisitos)){
-          if(aprobados.has(r.nombre)){
-            aprobados.delete(r.nombre);
-          } else {
-            aprobados.add(r.nombre);
-          }
+          if(aprobados.has(r.nombre)) aprobados.delete(r.nombre);
+          else aprobados.add(r.nombre);
           actualizarEstadoRamos();
         } else alert("Aún no cumples con los prerrequisitos: "+r.nombre);
       });
@@ -126,6 +123,22 @@ function crearMalla(){
     cont.appendChild(divS);
   }
   actualizarEstadoRamos();
+  generarEmojisFondo();
 }
 
 document.addEventListener("DOMContentLoaded",crearMalla);
+
+/* Función para crear emojis flotando en el fondo */
+function generarEmojisFondo(){
+  const emojis=["💉","🩸"];
+  for(let i=0;i<30;i++){
+    const span=document.createElement("span");
+    span.className="emoji";
+    span.textContent=emojis[Math.floor(Math.random()*emojis.length)];
+    span.style.left=Math.random()*100+"vw";
+    span.style.top=Math.random()*100+"vh";
+    span.style.animationDuration=(5+Math.random()*10)+"s";
+    span.style.fontSize=(16+Math.random()*24)+"px";
+    document.body.appendChild(span);
+  }
+}
