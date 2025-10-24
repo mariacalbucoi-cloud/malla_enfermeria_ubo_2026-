@@ -47,14 +47,14 @@ const malla = {
     { nombre: "Práctica Integrada en Enfermería VI", prerequisitos: ["Práctica Integrada en Enfermería V","Gestión del Cuidado en Comunidades I"] }
   ],
   "Séptimo semestre": [
-    { nombre: "Seminario de investigación en Enfermería I", prerequisitos: ["Metodología de la Investigación"] },
+    { nombre: "Seminario de Investigación en Enfermería I", prerequisitos: ["Metodología de la Investigación"] },
     { nombre: "Gestión del Cuidado en Comunidades III", prerequisitos: ["Gestión del Cuidado en Comunidades II","Práctica Integrada en Enfermería VI"] },
-    { nombre: "Gestión del Cuidado en la infancia y adolescencia I", prerequisitos: ["Salud Ocupacional","Gestión del Cuidado en Comunidades II"] },
+    { nombre: "Gestión del Cuidado en la Infancia y Adolescencia I", prerequisitos: ["Salud Ocupacional","Gestión del Cuidado en Comunidades II"] },
     { nombre: "Bienestar Profesional", prerequisitos: ["Salud Ocupacional"] },
     { nombre: "Práctica Integrada en Enfermería VII", prerequisitos: ["Salud Ocupacional","Práctica Integrada en Enfermería VI"] }
   ],
   "Octavo semestre": [
-    { nombre: "Seminario de Investigación en Enfermería II", prerequisitos: ["Seminario de investigación en Enfermería I"] },
+    { nombre: "Seminario de Investigación en Enfermería II", prerequisitos: ["Seminario de Investigación en Enfermería I"] },
     { nombre: "Gestión del Cuidado en la Infancia y Adolescencia II", prerequisitos: ["Gestión del Cuidado en la Infancia y Adolescencia I","Práctica Integrada en Enfermería VII"] },
     { nombre: "Gestión del Cuidado en Urgencias", prerequisitos: ["Gestión del Cuidado en la Infancia y Adolescencia I","Práctica Integrada en Enfermería VII"] },
     { nombre: "Gestión del Cuidado en Salud Mental y Psiquiatría", prerequisitos: ["Gestión del Cuidado en la Infancia y Adolescencia I","Práctica Integrada en Enfermería VII"] },
@@ -70,17 +70,16 @@ const malla = {
     { nombre: "Práctica Profesional en Enfermería en Atención Primaria de Salud (Opción B)", prerequisitos: ["Todas las asignaturas anteriores"] }
   ],
   "Décimo semestre": [
-    { nombre: "Práctica Profesional en Enfermería en Atención Primaria de Salud (Opción A)", prerequisitos: ["Intervención de Enfermería en Salud Comunitaria (Opción A)","Enfermería en Salud Familiar (Opción A)"] },
-    { nombre: "Práctica Profesional en Enfermería Hospitalaria (Opción B)", prerequisitos: ["Cuidados de Enfermería en Adulto Crítico (Opción B)","Enfermería en Unidades Quirúrgicas del Adulto (Opción B)"] }
+    { nombre: "Práctica Profesional en Enfermería en Atención Primaria de Salud (Opción A)", prerequisitos: ["Noveno semestre"] },
+    { nombre: "Práctica Profesional en Enfermería Hospitalaria (Opción B)", prerequisitos: ["Noveno semestre"] }
   ]
 };
 
 const aprobados = new Set();
 
 function puedeDesbloquear(prerequisitos) {
-  if (!prerequisitos || prerequisitos.length === 0) return true;
+  if (!prerequisitos) return true;
   if (prerequisitos.includes("Todas las asignaturas anteriores")) {
-    // Verifica que todas las asignaturas de semestres 1 a 8 estén aprobadas
     const nombresRamos = Object.values(malla).slice(0,8).flat().map(r => r.nombre);
     return nombresRamos.every(r => aprobados.has(r));
   }
@@ -122,11 +121,8 @@ function crearMallaInteractiva() {
 
       divRamo.addEventListener("click", () => {
         if (puedeDesbloquear(ramo.prerequisitos)) {
-          if (aprobados.has(ramo.nombre)) {
-            aprobados.delete(ramo.nombre);
-          } else {
-            aprobados.add(ramo.nombre);
-          }
+          if (aprobados.has(ramo.nombre)) aprobados.delete(ramo.nombre);
+          else aprobados.add(ramo.nombre);
           actualizarEstadoRamos();
         } else {
           alert("Aún no cumples con los prerrequisitos para: " + ramo.nombre);
