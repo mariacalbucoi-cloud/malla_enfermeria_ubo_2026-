@@ -1,150 +1,142 @@
-// --- Cursos completos 1° a 10° Semestre ---
-const COURSES = [
-  // 1° Semestre
-  { semestre: "1° Semestre", nombre: "Fundamentos de Biología y Genética Humana", prerreq: [] },
-  { semestre: "1° Semestre", nombre: "Bases Químicas y Bioquímicas de la Vida", prerreq: [] },
-  { semestre: "1° Semestre", nombre: "Gestión del Cuidado en Enfermería I", prerreq: [] },
-  { semestre: "1° Semestre", nombre: "Educación en Enfermería", prerreq: [] },
-  { semestre: "1° Semestre", nombre: "Identidad Universitaria I", prerreq: [] },
-  { semestre: "1° Semestre", nombre: "Lengua Extranjera I", prerreq: [] },
-  { semestre: "1° Semestre", nombre: "Práctica Integrada en Enfermería I", prerreq: [] },
+// --- Malla completa actualizada ---
+const malla = {
+  "Primer semestre": [
+    { nombre: "Fundamentos de Biología y Genética Humana" },
+    { nombre: "Bases Químicas y Bioquímicas de la Vida" },
+    { nombre: "Gestión del Cuidado en Enfermería I" },
+    { nombre: "Educación en Enfermería" },
+    { nombre: "Identidad Universitaria I" },
+    { nombre: "Lengua Extranjera I" },
+    { nombre: "Práctica Integrada en Enfermería I" }
+  ],
+  "Segundo semestre": [
+    { nombre: "Lengua Extranjera II", prerrequisitos: ["Lengua Extranjera I"] },
+    { nombre: "Identidad Universitaria II", prerrequisitos: ["Identidad Universitaria I"] },
+    { nombre: "Gestión del Cuidado en Enfermería II", prerrequisitos: ["Gestión del Cuidado en Enfermería I"] },
+    { nombre: "Matemáticas y Herramientas Informáticas para la Gestión en Salud", prerrequisitos: ["Educación en Enfermería"] },
+    { nombre: "Práctica Integrada en Enfermería II", prerrequisitos: ["Práctica Integrada en Enfermería I"] },
+    { nombre: "Morfología Micro y Macroscópica", prerrequisitos: ["Fundamentos de Biología y Genética Humana"] },
+    { nombre: "Microbiología y Agentes Infecciosos", prerrequisitos: ["Bases Químicas y Bioquímicas de la Vida"] }
+  ],
+  "Tercer semestre": [
+    { nombre: "Lengua Extranjera III", prerrequisitos: ["Lengua Extranjera II"] },
+    { nombre: "Gestión del Cuidado en Enfermería III", prerrequisitos: ["Gestión del Cuidado en Enfermería II"] },
+    { nombre: "Práctica Integrada en Enfermería III", prerrequisitos: ["Práctica Integrada en Enfermería II"] },
+    { nombre: "Integrado Fisiología, Fisiopatología y Farmacología I", prerrequisitos: ["Morfología Micro y Macroscópica"] }
+  ],
+  "Cuarto semestre": [
+    { nombre: "Lengua Extranjera IV", prerrequisitos: ["Lengua Extranjera III"] },
+    { nombre: "Responsabilidad Social Universitaria" },
+    { nombre: "Gestión del Cuidado en Enfermería IV", prerrequisitos: ["Gestión del Cuidado en Enfermería III","Práctica Integrada en Enfermería III"] },
+    { nombre: "Enfermería en Salud Pública y Determinantes Sociales", prerrequisitos: ["Matemáticas y Herramientas Informáticas para la Gestión en Salud"] },
+    { nombre: "Integrado Fisiología, Fisiopatología y Farmacología II", prerrequisitos: ["Integrado Fisiología, Fisiopatología y Farmacología I"] },
+    { nombre: "Práctica Integrada en Enfermería IV", prerrequisitos: ["Práctica Integrada en Enfermería III","Gestión del Cuidado en Enfermería III"] }
+  ],
+  "Quinto semestre": [
+    { nombre: "Ética y Bioética en Enfermería", prerrequisitos: ["Gestión del Cuidado en Enfermería IV"] },
+    { nombre: "Gestión del Cuidado en Comunidades I", prerrequisitos: ["Enfermería en Salud Pública y Determinantes Sociales","Integrado Fisiología, Fisiopatología y Farmacología II"] },
+    { nombre: "Gestión del Cuidado en el Adulto", prerrequisitos: ["Integrado Fisiología, Fisiopatología y Farmacología II","Gestión del Cuidado en Enfermería IV","Práctica Integrada en Enfermería IV"] },
+    { nombre: "Gestión del Cuidado en la Persona Mayor", prerrequisitos: ["Integrado Fisiología, Fisiopatología y Farmacología II","Gestión del Cuidado en Enfermería IV","Práctica Integrada en Enfermería IV"] },
+    { nombre: "Planificación Estratégica I", prerrequisitos: ["Gestión del Cuidado en Enfermería IV"] },
+    { nombre: "Práctica Integrada en Enfermería V", prerrequisitos: ["Práctica Integrada en Enfermería IV","Enfermería en Salud Pública y Determinantes Sociales"] }
+  ],
+  "Sexto semestre": [
+    { nombre: "Metodología de la Investigación", prerrequisitos: ["Ética y Bioética en Enfermería"] },
+    { nombre: "Gestión del Cuidado en Comunidades II", prerrequisitos: ["Gestión del Cuidado en Comunidades I","Práctica Integrada en Enfermería V"] },
+    { nombre: "Salud Ocupacional", prerrequisitos: ["Gestión del Cuidado en el Adulto"] },
+    { nombre: "Planificación Estratégica II", prerrequisitos: ["Planificación Estratégica I"] },
+    { nombre: "Práctica Integrada en Enfermería VI", prerrequisitos: ["Práctica Integrada en Enfermería V","Gestión del Cuidado en Comunidades I"] }
+  ],
+  "Séptimo semestre": [
+    { nombre: "Seminario de Investigación en Enfermería I", prerrequisitos: ["Metodología de la Investigación"] },
+    { nombre: "Gestión del Cuidado en Comunidades III", prerrequisitos: ["Gestión del Cuidado en Comunidades II","Práctica Integrada en Enfermería VI"] },
+    { nombre: "Gestión del Cuidado en la infancia y adolescencia I", prerrequisitos: ["Salud Ocupacional","Gestión del Cuidado en Comunidades II"] },
+    { nombre: "Bienestar Profesional", prerrequisitos: ["Salud Ocupacional"] },
+    { nombre: "Práctica Integrada en Enfermería VII", prerrequisitos: ["Salud Ocupacional","Práctica Integrada en Enfermería VI"] }
+  ],
+  "Octavo semestre": [
+    { nombre: "Seminario de Investigación en Enfermería II", prerrequisitos: ["Seminario de Investigación en Enfermería I"] },
+    { nombre: "Gestión del Cuidado en la Infancia y Adolescencia II", prerrequisitos: ["Gestión del Cuidado en la infancia y adolescencia I","Práctica Integrada en Enfermería VII"] },
+    { nombre: "Gestión del Cuidado en Urgencias", prerrequisitos: ["Gestión del Cuidado en la infancia y adolescencia I","Práctica Integrada en Enfermería VII"] },
+    { nombre: "Gestión del Cuidado en Salud Mental y Psiquiatría", prerrequisitos: ["Gestión del Cuidado en la infancia y adolescencia I","Práctica Integrada en Enfermería VII"] },
+    { nombre: "Gestión del Cuidado en Oncología y Cuidados Paliativos", prerrequisitos: ["Gestión del Cuidado en la infancia y adolescencia I","Gestión del Cuidado en Comunidades III","Práctica Integrada en Enfermería VII"] },
+    { nombre: "Práctica Integrada en Enfermería VIII", prerrequisitos: ["Práctica Integrada en Enfermería VII","Gestión del Cuidado en la infancia y adolescencia I"] }
+  ],
+  "Noveno semestre": [
+    { nombre: "Intervención de Enfermería en Salud Comunitaria (Opción A)", prerrequisitos: ["Todas las asignaturas anteriores"] },
+    { nombre: "Enfermería en Salud Familiar (Opción A)", prerrequisitos: ["Todas las asignaturas anteriores"] },
+    { nombre: "Práctica Profesional en Enfermería Hospitalaria (Opción A)", prerrequisitos: ["Todas las asignaturas anteriores"] }
+  ],
+  "Décimo semestre": [
+    { nombre: "Práctica Profesional en Enfermería en Atención Primaria de Salud (Opción A)", prerrequisitos: ["Intervención de Enfermería en Salud Comunitaria (Opción A)","Enfermería en Salud Familiar (Opción A)"] },
+    { nombre: "Práctica Profesional en Enfermería Hospitalaria (Opción B)", prerrequisitos: ["Cuidados de Enfermería en Adulto Crítico (Opción B)","Enfermería en Unidades Quirúrgicas del Adulto (Opción B)"] }
+  ]
+};
 
-  // 2° Semestre
-  { semestre: "2° Semestre", nombre: "Lengua Extranjera II", prerreq: ["Lengua Extranjera I"] },
-  { semestre: "2° Semestre", nombre: "Identidad Universitaria II", prerreq: ["Identidad Universitaria I"] },
-  { semestre: "2° Semestre", nombre: "Gestión del Cuidado en Enfermería II", prerreq: ["Gestión del Cuidado en Enfermería I"] },
-  { semestre: "2° Semestre", nombre: "Matemáticas y Herramientas Informáticas para la Gestión en Salud", prerreq: ["Educación en Enfermería"] },
-  { semestre: "2° Semestre", nombre: "Práctica Integrada en Enfermería II", prerreq: ["Práctica Integrada en Enfermería I"] },
-  { semestre: "2° Semestre", nombre: "Morfología Micro y Macroscópica", prerreq: ["Fundamentos de Biología y Genética Humana"] },
-  { semestre: "2° Semestre", nombre: "Microbiología y Agentes Infecciosos", prerreq: ["Bases Químicas y Bioquímicas de la Vida"] },
-
-  // 3° Semestre
-  { semestre: "3° Semestre", nombre: "Lengua Extranjera III", prerreq: ["Lengua Extranjera II"] },
-  { semestre: "3° Semestre", nombre: "Gestión del Cuidado en Enfermería III", prerreq: ["Gestión del Cuidado en Enfermería II"] },
-  { semestre: "3° Semestre", nombre: "Práctica Integrada en Enfermería III", prerreq: ["Práctica Integrada en Enfermería II"] },
-  { semestre: "3° Semestre", nombre: "Integrado Fisiología, Fisiopatología y Farmacología en Enfermería I", prerreq: ["Morfología Micro y Macroscópica"] },
-
-  // 4° Semestre
-  { semestre: "4° Semestre", nombre: "Lengua Extranjera IV", prerreq: ["Lengua Extranjera III"] },
-  { semestre: "4° Semestre", nombre: "Responsabilidad Social Universitaria", prerreq: ["Formación Ética para el Desarrollo Sostenible"] },
-  { semestre: "4° Semestre", nombre: "Gestión del Cuidado en Enfermería IV", prerreq: ["Gestión del Cuidado en Enfermería III","Práctica Integrada en Enfermería III"] },
-  { semestre: "4° Semestre", nombre: "Enfermería en Salud Pública y Determinantes Sociales", prerreq: ["Matemáticas y Herramientas Informáticas para la Gestión en Salud"] },
-  { semestre: "4° Semestre", nombre: "Integrado Fisiología, Fisiopatología y Farmacología en Enfermería II", prerreq: ["Integrado Fisiología, Fisiopatología y Farmacología en Enfermería I"] },
-  { semestre: "4° Semestre", nombre: "Práctica Integrada en Enfermería IV", prerreq: ["Práctica Integrada en Enfermería III","Gestión del Cuidado en Enfermería III"] },
-
-  // 5° Semestre
-  { semestre: "5° Semestre", nombre: "Ética y Bioética en Enfermería", prerreq: ["Gestión del Cuidado en Enfermería IV"] },
-  { semestre: "5° Semestre", nombre: "Gestión del Cuidado en Comunidades I", prerreq: ["Enfermería en Salud Pública y Determinantes Sociales","Integrado Fisiología, Fisiopatología y Farmacología en Enfermería II"] },
-  { semestre: "5° Semestre", nombre: "Gestión del Cuidado en el Adulto", prerreq: ["Integrado Fisiología, Fisiopatología y Farmacología en Enfermería II","Gestión del Cuidado en Enfermería IV","Práctica Integrada en Enfermería IV"] },
-  { semestre: "5° Semestre", nombre: "Gestión del Cuidado en la Persona Mayor", prerreq: ["Integrado Fisiología, Fisiopatología y Farmacología en Enfermería II","Gestión del Cuidado en Enfermería IV","Práctica Integrada en Enfermería IV"] },
-  { semestre: "5° Semestre", nombre: "Planificación Estratégica I", prerreq: ["Gestión del Cuidado en Enfermería IV"] },
-  { semestre: "5° Semestre", nombre: "Práctica Integrada en Enfermería V", prerreq: ["Práctica Integrada en Enfermería IV","Enfermería en Salud Pública y Determinantes Sociales"] },
-
-  // 6° Semestre
-  { semestre: "6° Semestre", nombre: "Metodología de la Investigación", prerreq: ["Ética y Bioética en Enfermería"] },
-  { semestre: "6° Semestre", nombre: "Gestión del Cuidado en Comunidades II", prerreq: ["Gestión del Cuidado en Comunidades I","Práctica Integrada en Enfermería V"] },
-  { semestre: "6° Semestre", nombre: "Salud Ocupacional", prerreq: ["Gestión del Cuidado en el Adulto"] },
-  { semestre: "6° Semestre", nombre: "Planificación Estratégica II", prerreq: ["Planificación Estratégica I"] },
-  { semestre: "6° Semestre", nombre: "Práctica Integrada en Enfermería VI", prerreq: ["Práctica Integrada en Enfermería V","Gestión del Cuidado en Comunidades I"] },
-
-  // 7° Semestre
-  { semestre: "7° Semestre", nombre: "Seminario de investigación en Enfermería I", prerreq: ["Metodología de la Investigación"] },
-  { semestre: "7° Semestre", nombre: "Gestión del Cuidado en Comunidades III", prerreq: ["Gestión del Cuidado en Comunidades II","Práctica Integrada en Enfermería VI"] },
-  { semestre: "7° Semestre", nombre: "Gestión del Cuidado en la infancia y adolescencia I", prerreq: ["Salud Ocupacional","Gestión del Cuidado en Comunidades II"] },
-  { semestre: "7° Semestre", nombre: "Bienestar Profesional", prerreq: ["Salud Ocupacional"] },
-  { semestre: "7° Semestre", nombre: "Práctica Integrada en Enfermería VII", prerreq: ["Salud Ocupacional","Práctica Integrada en Enfermería VI"] },
-
-  // 8° Semestre
-  { semestre: "8° Semestre", nombre: "Seminario de Investigación en Enfermería II", prerreq: ["Seminario de investigación en Enfermería I"] },
-  { semestre: "8° Semestre", nombre: "Gestión del Cuidado en la Infancia y Adolescencia II", prerreq: ["Gestión del Cuidado en la Infancia y Adolescencia I","Práctica Integrada en Enfermería VII"] },
-  { semestre: "8° Semestre", nombre: "Gestión del Cuidado en Urgencias", prerreq: ["Gestión del Cuidado en la Infancia y Adolescencia I","Práctica Integrada en Enfermería VII"] },
-  { semestre: "8° Semestre", nombre: "Gestión del Cuidado en Salud Mental y Psiquiatría", prerreq: ["Gestión del Cuidado en la Infancia y Adolescencia I","Práctica Integrada en Enfermería VII"] },
-  { semestre: "8° Semestre", nombre: "Gestión del Cuidado en Oncología y Cuidados Paliativos", prerreq: ["Gestión del Cuidado en la Infancia y Adolescencia I","Gestión del Cuidado en Comunidades III","Práctica Integrada en Enfermería VII"] },
-  { semestre: "8° Semestre", nombre: "Práctica Integrada en Enfermería VIII", prerreq: ["Práctica Integrada en Enfermería VII","Gestión del Cuidado en la Infancia y Adolescencia I"] },
-
-  // 9° Semestre
-  { semestre: "9° Semestre", nombre: "Intervención de Enfermería en Salud Comunitaria (Opción A)", prerreq: ["Aprobadas asignaturas de 1er a 8vo semestre inclusive"] },
-  { semestre: "9° Semestre", nombre: "Enfermería en Salud Familiar (Opción A)", prerreq: ["Aprobadas asignaturas de 1er a 8vo semestre inclusive"] },
-  { semestre: "9° Semestre", nombre: "Práctica profesional en Enfermería Hospitalaria (Opción A)", prerreq: ["Aprobadas asignaturas de 1er a 8vo semestre inclusive"] },
-  { semestre: "9° Semestre", nombre: "Cuidados de Enfermería en Adulto Crítico (Opción B)", prerreq: ["Aprobadas asignaturas de 1er a 8vo semestre inclusive"] },
-  { semestre: "9° Semestre", nombre: "Enfermería en Unidades Quirúrgicas del Adulto (Opción B)", prerreq: ["Aprobadas asignaturas de 1er a 8vo semestre inclusive"] },
-  { semestre: "9° Semestre", nombre: "Práctica Profesional en Enfermería en Atención Primaria de Salud (Opción B)", prerreq: ["Aprobadas asignaturas de 1er a 8vo semestre inclusive"] },
-
-  // 10° Semestre
-  { semestre: "10° Semestre", nombre: "Práctica Profesional en Enfermería en Atención Primaria de Salud (Opción A)", prerreq: ["Intervención de Enfermería en Salud Comunitaria (Opción A)","Enfermería en Salud Familiar (Opción A)"] },
-  { semestre: "10° Semestre", nombre: "Práctica Profesional en Enfermería Hospitalaria (Opción B)", prerreq: ["Cuidados de Enfermería en Adulto Crítico (Opción B)","Enfermería en Unidades Quirúrgicas del Adulto (Opción B)"] }
-];
-
-// --- Jeringas flotando de fondo ---
+// --- Fondo de jeringas ---
 for(let i=0;i<20;i++){
-  const syringe = document.createElement('div');
-  syringe.className='syringe';
-  syringe.textContent='💉';
-  syringe.style.left=Math.random()*window.innerWidth+'px';
-  syringe.style.animationDelay=(Math.random()*15)+'s';
-  syringe.style.fontSize=(16+Math.random()*24)+'px';
-  document.body.appendChild(syringe);
+  const s=document.createElement('div');
+  s.className='syringe';
+  s.textContent='💉';
+  s.style.left=Math.random()*window.innerWidth+'px';
+  s.style.animationDelay=(Math.random()*15)+'s';
+  s.style.fontSize=(16+Math.random()*24)+'px';
+  document.body.appendChild(s);
 }
 
-// --- Interactividad ---
-const semestersDiv = document.getElementById("semesters");
-const resetBtn = document.getElementById("resetBtn");
-const selectedCount = document.getElementById("selectedCount");
-let state = JSON.parse(localStorage.getItem("mallaState")) || {};
+const aprobados = new Set();
 
-function saveState(){ localStorage.setItem("mallaState", JSON.stringify(state)); }
-
-function updateCount(){
-  const done = Object.values(state).filter(v=>v==="done").length;
-  selectedCount.textContent = `Seleccionados: ${done}`;
+function puedeDesbloquear(prerequisitos){
+  return (prerequisitos || []).every(r=>aprobados.has(r) || r==="Todas las asignaturas anteriores");
 }
 
-// Agrupar por semestre
-const semestres = {};
-COURSES.forEach(c=>{
-  if(!semestres[c.semestre]) semestres[c.semestre]=[];
-  semestres[c.semestre].push(c);
-});
-
-function render(){
-  semestersDiv.innerHTML="";
-  Object.entries(semestres).forEach(([semestre, cursos])=>{
-    const card = document.createElement("div");
-    card.className="semester-card";
-    card.innerHTML=`<h3>${semestre} 💉</h3><div class='courses'></div>`;
-    const list = card.querySelector(".courses");
-
-    cursos.forEach(curso=>{
-      const el=document.createElement("div");
-      const key=curso.nombre;
-      const status=state[key]||"locked";
-      const canUnlock = curso.prerreq.length===0 || curso.prerreq.every(p=>state[p]==="done");
-      const cssClass = status==="done" ? "done" : canUnlock ? "available" : "locked";
-      el.className = "course "+cssClass;
-      el.textContent = curso.nombre;
-
-      el.addEventListener("click",()=>{
-        if(el.classList.contains("locked")) return;
-        state[key] = state[key]==="done" ? "available":"done";
-        saveState();
-        render();
-      });
-
-      list.appendChild(el);
-    });
-
-    semestersDiv.appendChild(card);
+function actualizarEstadoRamos(){
+  document.querySelectorAll('.ramo').forEach(div=>{
+    const nombre=div.dataset.nombre;
+    const prerequisitos=JSON.parse(div.dataset.prerequisitos || '[]');
+    if(aprobados.has(nombre)){
+      div.classList.add('aprobado');
+      div.classList.remove('bloqueado');
+      div.classList.remove('disponible');
+    }else if(puedeDesbloquear(prerequisitos)){
+      div.classList.add('disponible');
+      div.classList.remove('bloqueado');
+      div.classList.remove('aprobado');
+    }else{
+      div.classList.add('bloqueado');
+      div.classList.remove('aprobado');
+      div.classList.remove('disponible');
+    }
   });
-
-  updateCount();
 }
 
-resetBtn.addEventListener("click", ()=>{
-  if(confirm("¿Seguro que quieres reiniciar la malla?")){
-    state={};
-    saveState();
-    render();
+function crearMallaInteractiva(){
+  const cont=document.getElementById('malla-container');
+  cont.innerHTML='';
+  for(const [semestre,ramos] of Object.entries(malla)){
+    const divS=document.createElement('div');
+    divS.className='semestre';
+    divS.innerHTML=`<h2>${semestre}</h2>`;
+    ramos.forEach(r=>{
+      const divR=document.createElement('div');
+      divR.className='ramo bloqueado';
+      divR.textContent=r.nombre;
+      divR.dataset.nombre=r.nombre;
+      divR.dataset.prerequisitos=JSON.stringify(r.prerrequisitos||[]);
+      divR.addEventListener('click',()=>{
+        if(puedeDesbloquear(r.prerrequisitos)){
+          aprobados.has(r.nombre)?aprobados.delete(r.nombre):aprobados.add(r.nombre);
+          actualizarEstadoRamos();
+        }else{
+          alert("Aún no cumples los prerrequisitos de: "+r.nombre);
+        }
+      });
+      divS.appendChild(divR);
+    });
+    cont.appendChild(divS);
   }
-});
+  actualizarEstadoRamos();
+}
 
-render();
+document.addEventListener('DOMContentLoaded',crearMallaInteractiva);
+
