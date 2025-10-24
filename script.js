@@ -1,4 +1,6 @@
-// --- Malla Interactiva Enfermería UBO 2026 --- //
+// --- Malla Interactiva Enfermería UBO 2025 ---
+// --- Generado automáticamente desde tu malla ---
+
 export const COURSES = [
   // 1° Semestre
   { semestre: "1° Semestre", nombre: "Fundamentos de Biología y Genética Humana", prerreq: [] },
@@ -27,53 +29,53 @@ export const COURSES = [
   // 4° Semestre
   { semestre: "4° Semestre", nombre: "Lengua Extranjera IV", prerreq: ["Lengua Extranjera III"] },
   { semestre: "4° Semestre", nombre: "Responsabilidad Social Universitaria", prerreq: ["Formación Ética para el Desarrollo Sostenible"] },
-  { semestre: "4° Semestre", nombre: "Gestión del Cuidado en Enfermería IV", prerreq: ["Gestión del Cuidado en Enfermería III", "Práctica Integrada en Enfermería III"] },
+  { semestre: "4° Semestre", nombre: "Gestión del Cuidado en Enfermería IV", prerreq: ["Gestión del Cuidado en Enfermería III","Práctica Integrada en Enfermería III"] },
   { semestre: "4° Semestre", nombre: "Enfermería en Salud Pública y Determinantes Sociales", prerreq: ["Matemáticas y Herramientas Informáticas para la Gestión en Salud"] },
   { semestre: "4° Semestre", nombre: "Integrado Fisiología, Fisiopatología y Farmacología en Enfermería II", prerreq: ["Integrado Fisiología, Fisiopatología y Farmacología en Enfermería I"] },
-  { semestre: "4° Semestre", nombre: "Práctica Integrada en Enfermería IV", prerreq: ["Práctica Integrada en Enfermería III", "Gestión del Cuidado en Enfermería III"] },
+  { semestre: "4° Semestre", nombre: "Práctica Integrada en Enfermería IV", prerreq: ["Práctica Integrada en Enfermería III","Gestión del Cuidado en Enfermería III"] },
 
   // 5° Semestre
   { semestre: "5° Semestre", nombre: "Ética y Bioética en Enfermería", prerreq: ["Gestión del Cuidado en Enfermería IV"] },
-  { semestre: "5° Semestre", nombre: "Gestión del Cuidado en Comunidades I", prerreq: ["Enfermería en Salud Pública y Determinantes Sociales", "Integrado Fisiología, Fisiopatología y Farmacología en Enfermería II"] },
-  { semestre: "5° Semestre", nombre: "Gestión del Cuidado en el Adulto", prerreq: ["Integrado Fisiología, Fisiopatología y Farmacología en Enfermería II", "Gestión del Cuidado en Enfermería IV", "Práctica Integrada en Enfermería IV"] },
-  { semestre: "5° Semestre", nombre: "Gestión del Cuidado en la Persona Mayor", prerreq: ["Integrado Fisiología, Fisiopatología y Farmacología en Enfermería II", "Gestión del Cuidado en Enfermería IV", "Práctica Integrada en Enfermería IV"] },
+  { semestre: "5° Semestre", nombre: "Gestión del Cuidado en Comunidades I", prerreq: ["Enfermería en Salud Pública y Determinantes Sociales","Integrado Fisiología, Fisiopatología y Farmacología en Enfermería II"] },
+  { semestre: "5° Semestre", nombre: "Gestión del Cuidado en el Adulto", prerreq: ["Integrado Fisiología, Fisiopatología y Farmacología en Enfermería II","Gestión del Cuidado en Enfermería IV","Práctica Integrada en Enfermería IV"] },
+  { semestre: "5° Semestre", nombre: "Gestión del Cuidado en la Persona Mayor", prerreq: ["Integrado Fisiología Fisiopatología y Farmacología en Enfermería II","Gestión del Cuidado en Enfermería IV","Práctica Integrada en Enfermería IV"] },
   { semestre: "5° Semestre", nombre: "Planificación Estratégica I", prerreq: ["Gestión del Cuidado en Enfermería IV"] },
-  { semestre: "5° Semestre", nombre: "Práctica Integrada en Enfermería V", prerreq: ["Práctica Integrada en Enfermería IV", "Enfermería en Salud Pública y Determinantes Sociales"] },
+  { semestre: "5° Semestre", nombre: "Práctica Integrada en Enfermería V", prerreq: ["Práctica Integrada en Enfermería IV","Enfermería en Salud Pública y Determinantes Sociales"] },
 
   // 6° Semestre
   { semestre: "6° Semestre", nombre: "Metodología de la Investigación", prerreq: ["Ética y Bioética en Enfermería"] },
-  { semestre: "6° Semestre", nombre: "Gestión del Cuidado en Comunidades II", prerreq: ["Gestión del Cuidado en Comunidades I", "Práctica Integrada en Enfermería V"] },
+  { semestre: "6° Semestre", nombre: "Gestión del Cuidado en Comunidades II", prerreq: ["Gestión del Cuidado en Comunidades I","Práctica Integrada en Enfermería V"] },
   { semestre: "6° Semestre", nombre: "Salud Ocupacional", prerreq: ["Gestión del Cuidado en el Adulto"] },
   { semestre: "6° Semestre", nombre: "Planificación Estratégica II", prerreq: ["Planificación Estratégica I"] },
-  { semestre: "6° Semestre", nombre: "Práctica Integrada en Enfermería VI", prerreq: ["Práctica Integrada en Enfermería V", "Gestión del Cuidado en Comunidades I"] },
+  { semestre: "6° Semestre", nombre: "Práctica Integrada en Enfermería VI", prerreq: ["Práctica Integrada en Enfermería V","Gestión del Cuidado en Comunidades I"] },
 
   // 7° Semestre
   { semestre: "7° Semestre", nombre: "Seminario de investigación en Enfermería I", prerreq: ["Metodología de la Investigación"] },
-  { semestre: "7° Semestre", nombre: "Gestión del Cuidado en Comunidades III", prerreq: ["Gestión del Cuidado en Comunidades II", "Práctica Integrada en Enfermería VI"] },
-  { semestre: "7° Semestre", nombre: "Gestión del Cuidado en la infancia y adolescencia I", prerreq: ["Salud Ocupacional", "Gestión del Cuidado en Comunidades II"] },
+  { semestre: "7° Semestre", nombre: "Gestión del Cuidado en Comunidades III", prerreq: ["Gestión del Cuidado en Comunidades II","Práctica Integrada en Enfermería VI"] },
+  { semestre: "7° Semestre", nombre: "Gestión del Cuidado en la infancia y adolescencia I", prerreq: ["Salud Ocupacional","Gestión del Cuidado en Comunidades II"] },
   { semestre: "7° Semestre", nombre: "Bienestar Profesional", prerreq: ["Salud Ocupacional"] },
-  { semestre: "7° Semestre", nombre: "Práctica Integrada en Enfermería VII", prerreq: ["Salud Ocupacional", "Práctica Integrada en Enfermería VI"] },
+  { semestre: "7° Semestre", nombre: "Práctica Integrada en Enfermería VII", prerreq: ["Salud Ocupacional","Práctica Integrada en Enfermería VI"] },
 
   // 8° Semestre
-  { semestre: "8° Semestre", nombre: "Seminario de Investigación en Enfermería II", prerreq: ["Seminario de investigación en Enfermería I"] },
-  { semestre: "8° Semestre", nombre: "Gestión del Cuidado en la Infancia y Adolescencia II", prerreq: ["Gestión del Cuidado en la infancia y adolescencia I", "Práctica Integrada en Enfermería VII"] },
-  { semestre: "8° Semestre", nombre: "Gestión del Cuidado en Urgencias", prerreq: ["Gestión del Cuidado en la infancia y adolescencia I", "Práctica Integrada en Enfermería VII"] },
-  { semestre: "8° Semestre", nombre: "Gestión del Cuidado en Salud Mental y Psiquiatría", prerreq: ["Gestión del Cuidado en la infancia y adolescencia I", "Práctica Integrada en Enfermería VII"] },
-  { semestre: "8° Semestre", nombre: "Gestión del Cuidado en Oncología y Cuidados Paliativos", prerreq: ["Gestión del Cuidado en la infancia y adolescencia I", "Gestión del Cuidado en Comunidades III", "Práctica Integrada en Enfermería VII"] },
-  { semestre: "8° Semestre", nombre: "Práctica Integrada en Enfermería VIII", prerreq: ["Práctica Integrada en Enfermería VII", "Gestión del Cuidado en la infancia y adolescencia I"] },
+  { semestre: "8° Semestre", nombre: "Seminario de Investigación en Enfermería II", prerreq: ["Seminario de Investigación en Enfermería I"] },
+  { semestre: "8° Semestre", nombre: "Gestión del Cuidado en la Infancia y Adolescencia II", prerreq: ["Gestión del Cuidado en la Infancia y Adolescencia I","Práctica Integrada en Enfermería VII"] },
+  { semestre: "8° Semestre", nombre: "Gestión del Cuidado en Urgencias", prerreq: ["Gestión del Cuidado en la Infancia y Adolescencia I","Práctica Integrada en Enfermería VII"] },
+  { semestre: "8° Semestre", nombre: "Gestión del Cuidado en Salud Mental y Psiquiatría", prerreq: ["Gestión del Cuidado en la Infancia y Adolescencia I","Práctica Integrada en Enfermería VII"] },
+  { semestre: "8° Semestre", nombre: "Gestión del Cuidado en Oncología y Cuidados Paliativos", prerreq: ["Gestión del Cuidado en la Infancia y Adolescencia I","Gestión del Cuidado en Comunidades III","Práctica Integrada en Enfermería VII"] },
+  { semestre: "8° Semestre", nombre: "Práctica Integrada en Enfermería VIII", prerreq: ["Práctica Integrada en Enfermería VII","Gestión del Cuidado en la Infancia y Adolescencia I"] },
 
   // 9° Semestre
-  { semestre: "9° Semestre", nombre: "Intervención de Enfermería en Salud Comunitaria", prerreq: [] },
-  { semestre: "9° Semestre", nombre: "Enfermería en Salud Familiar", prerreq: [] },
-  { semestre: "9° Semestre", nombre: "Práctica profesional en Enfermería Hospitalaria", prerreq: [] },
-  { semestre: "9° Semestre", nombre: "Cuidados de Enfermería en Adulto Crítico", prerreq: [] },
-  { semestre: "9° Semestre", nombre: "Enfermería en Unidades Quirúrgicas del Adulto", prerreq: [] },
+  { semestre: "9° Semestre", nombre: "Intervención de Enfermería en Salud Comunitaria (Opción A)", prerreq: ["Aprobadas asignaturas de 1er a 8vo semestre inclusive"] },
+  { semestre: "9° Semestre", nombre: "Enfermería en Salud Familiar (Opción A)", prerreq: ["Aprobadas asignaturas de 1er a 8vo semestre inclusive"] },
+  { semestre: "9° Semestre", nombre: "Práctica profesional en Enfermería Hospitalaria (Opción A)", prerreq: ["Aprobadas asignaturas de 1er a 8vo semestre inclusive"] },
+  { semestre: "9° Semestre", nombre: "Cuidados de Enfermería en Adulto Crítico (Opción B)", prerreq: ["Aprobadas asignaturas de 1er a 8vo semestre inclusive"] },
+  { semestre: "9° Semestre", nombre: "Enfermería en Unidades Quirúrgicas del Adulto (Opción B)", prerreq: ["Aprobadas asignaturas de 1er a 8vo semestre inclusive"] },
+  { semestre: "9° Semestre", nombre: "Práctica Profesional en Enfermería en Atención Primaria de Salud (Opción B)", prerreq: ["Aprobadas asignaturas de 1er a 8vo semestre inclusive"] },
 
   // 10° Semestre
-  { semestre: "10° Semestre", nombre: "Práctica Profesional en Enfermería en Atención Primaria de Salud", prerreq: [] },
-  { semestre: "10° Semestre", nombre: "Práctica Profesional en Enfermería Hospitalaria", prerreq: [] }
+  { semestre: "10° Semestre", nombre: "Práctica Profesional en Enfermería en Atención Primaria de Salud (Opción A)", prerreq: ["Intervención de Enfermería en Salud Comunitaria (Opción A)","Enfermería en Salud Familiar (Opción A)"] },
+  { semestre: "10° Semestre", nombre: "Práctica Profesional en Enfermería Hospitalaria (Opción B)", prerreq: ["Cuidados de Enfermería en Adulto Crítico (Opción B)","Enfermería en Unidades Quirúrgicas del Adulto (Opción B)"] }
 ];
-
 // --- Renderizado Malla ---
 const semestersDiv = document.getElementById("semesters");
 const resetBtn = document.getElementById("resetBtn");
