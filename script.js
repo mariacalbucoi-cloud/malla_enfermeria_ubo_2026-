@@ -74,56 +74,35 @@ export const COURSES = [
   { semestre: "10° Semestre", nombre: "Práctica Profesional en Enfermería Hospitalaria", prerreq: [] }
 ];
 
-// --- Script para renderizar la malla ---
+// --- Renderizado Malla ---
 const semestersDiv = document.getElementById("semesters");
 const resetBtn = document.getElementById("resetBtn");
 const selectedCount = document.getElementById("selectedCount");
-
 let state = JSON.parse(localStorage.getItem("mallaState")) || {};
 
-function saveState() {
-  localStorage.setItem("mallaState", JSON.stringify(state));
-}
+function saveState() { localStorage.setItem("mallaState", JSON.stringify(state)); }
+function updateCount() { selectedCount.textContent = `Seleccionados: ${Object.values(state).filter(v=>v==="done").length}`; }
 
-function updateCount() {
-  const done = Object.values(state).filter(v => v === "done").length;
-  selectedCount.textContent = `Seleccionados: ${done}`;
-}
-
-// Agrupar por semestre manteniendo orden
 const semestres = {};
-COURSES.forEach(c => {
-  if (!semestres[c.semestre]) semestres[c.semestre] = [];
-  semestres[c.semestre].push(c);
-});
+COURSES.forEach(c => { if(!semestres[c.semestre]) semestres[c.semestre]=[]; semestres[c.semestre].push(c); });
 
 function render() {
   semestersDiv.innerHTML = "";
   Object.entries(semestres).forEach(([semestre, cursos]) => {
     const card = document.createElement("div");
     card.className = "semester-card";
-    card.innerHTML = `<h3>💉 ${semestre}</h3><div class='courses'></div>`;
+    card.innerHTML = `<h3>💉 ${semestre}</h3><div class="courses"></div>`;
     const list = card.querySelector(".courses");
 
     cursos.forEach(curso => {
       const el = document.createElement("div");
       const key = curso.nombre;
       const status = state[key] || "locked";
-
-      // Verificar prerrequisitos
-      const canUnlock = (curso.prerreq.length === 0) || curso.prerreq.every(p => state[p] === "done");
-      const cssClass = status === "done" ? "done" : canUnlock ? "available" : "locked";
-
+      const canUnlock = curso.prerreq.length === 0 || curso.prerreq.every(p => state[p]==="done");
+      const cssClass = status==="done" ? "done" : canUnlock ? "available" : "locked";
       el.className = `course ${cssClass}`;
       el.textContent = curso.nombre;
-
-      el.addEventListener("click", () => {
-        if (el.classList.contains("locked")) return;
-        state[key] = state[key] === "done" ? "available" : "done";
-        saveState();
-        render();
-      });
-
+      el.addEventListener("click", () => { if(cssClass==="locked") return; state[key] = state[key]==="done"?"available":"done"; saveState(); render(); });
       list.appendChild(el);
     });
 
@@ -132,12 +111,26 @@ function render() {
   updateCount();
 }
 
-resetBtn.addEventListener("click", () => {
-  if (confirm("¿Seguro que quieres reiniciar la malla?")) {
-    state = {};
-    saveState();
-    render();
-  }
-});
-
+resetBtn.addEventListener("click", () => { if(confirm("¿Seguro que quieres reiniciar la malla?")) { state={}; saveState(); render(); } });
 render();
+
+// --- Emojis flotantes ---
+function createEmoji() {
+  const emoji = document.createElement("div");
+  emoji.textContent = "💉";
+  emoji.className = "emoji";
+  emoji.style.left = `${Math.random()*100}%`;
+  emoji.style.top = `-50px`;
+  emoji.style.fontSize = `${Math.random()*30+20}px`;
+  document.body.appendChild(emoji);
+  let top = -50;
+  const speed = Math.random()*2+1;
+  function fall() {
+    top += speed;
+    emoji.style.top = `${top}px`;
+    if(top < window.innerHeight + 50) requestAnimationFrame(fall);
+    else emoji.remove();
+  }
+  fall();
+}
+setInterval(createEmoji, 300);
