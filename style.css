@@ -5,44 +5,22 @@ html, body {
   width: 100%;
   height: 100%;
   font-family: "Times New Roman", serif;
-  background-color: #b3d9ff; /* celeste pastel */
+  background-color: #b3d9ff;
   color: #31708e;
   overflow-x: hidden;
   position: relative;
 }
 
-/* Fondo animado con emojis */
-body::before {
-  content: '💉 🩸 💉 🩸 💉 🩸 💉 🩸';
-  position: fixed;
-  top: -50%;
-  left: 0;
-  width: 200%;
-  height: 200%;
-  font-size: 3rem;
-  color: rgba(255, 0, 0, 0.2);
-  animation: moveEmojis 25s linear infinite;
-  pointer-events: none;
-  z-index: 0;
-}
-
-@keyframes moveEmojis {
-  0% { transform: translate(0, 0) rotate(0deg);}
-  50% { transform: translate(-50%, 50%) rotate(180deg);}
-  100% { transform: translate(0, 0) rotate(360deg);}
-}
-
-/* Header centrado */
+/* Header */
 header {
   width: 100%;
-  padding: 1rem 0;
   text-align: center;
-  position: relative;
-  z-index: 1;
+  padding: 1rem;
+  background-color: #d9ecff;
+  border-bottom: 2px solid #9dcde1;
 }
-
-header h1 { margin: 0; font-size: 2.5rem; color: #2f4f6f; }
-header p { margin: 0; font-size: 1.2rem; color: #31708e; }
+header h1 { margin:0; font-size:2.5rem; color:#2f4f6f; }
+header p { margin:0; font-size:1.2rem; color:#31708e; }
 
 /* Contenedor principal */
 #malla-container {
@@ -76,12 +54,15 @@ header p { margin: 0; font-size: 1.2rem; color: #31708e; }
   user-select: none;
   transition: background-color 0.3s ease, border-color 0.3s ease;
 }
-
-/* Estado aprobado */
-.ramo.aprobado { background-color: #c1e8c1; border-color: #4caf50; }
-
-/* Estado bloqueado */
-.ramo.bloqueado { background-color: #f0d4d4; border-color: #e57373; opacity: 0.6; }
+.ramo.aprobado {
+  background-color: #c1e8c1;
+  border-color: #4caf50;
+}
+.ramo.bloqueado {
+  background-color: #f0d4d4;
+  border-color: #e57373;
+  opacity: 0.6;
+}
 
 /* Footer */
 footer {
@@ -91,7 +72,29 @@ footer {
   font-size: 0.9rem;
   background-color: #d9ecff;
   border-top: 1px solid #9dcde1;
-  margin-top: 2rem;
-  position: relative;
-  z-index: 1;
+}
+
+/* Fondo animado de emojis */
+body::before {
+  content: "";
+  position: fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  z-index:0;
+  pointer-events:none;
+}
+
+.emoji {
+  position: absolute;
+  font-size: 2rem;
+  opacity: 0.6;
+  animation: float 10s linear infinite;
+}
+
+@keyframes float {
+  0% { transform: translateY(100vh) translateX(0); }
+  50% { transform: translateY(50vh) translateX(20px); }
+  100% { transform: translateY(-10vh) translateX(-20px); }
 }
