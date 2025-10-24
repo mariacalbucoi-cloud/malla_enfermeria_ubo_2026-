@@ -1,13 +1,14 @@
 body {
-  margin: 0;
   font-family: Arial, sans-serif;
-  background: #ccefff;
+  margin: 0;
+  padding: 0;
+  background-color: #cceeff;
   overflow-x: hidden;
   position: relative;
 }
 
 .topbar {
-  background: #00aaff;
+  background-color: #0099cc;
   color: white;
   padding: 10px;
   text-align: center;
@@ -15,7 +16,7 @@ body {
 
 .legend {
   margin-top: 5px;
-  font-size: 14px;
+  font-size: 0.9em;
 }
 
 .dot {
@@ -26,68 +27,61 @@ body {
   margin-right: 5px;
 }
 
-.done { background: green; }
-.available { background: #00ffff; }
-.locked { background: gray; }
+.dot.aprobado { background-color: green; }
+.dot.disponible { background-color: #66ccff; }
+.dot.bloqueado { background-color: grey; }
 
 .container {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   padding: 20px;
 }
 
-.semester-card {
-  background: rgba(255,255,255,0.9);
-  border-radius: 10px;
-  box-shadow: 0 0 10px #aaa;
+.semestre {
+  border: 1px solid #0099cc;
+  border-radius: 8px;
   margin: 10px;
-  padding: 15px;
-  width: 300px;
+  padding: 10px;
+  width: 280px;
+  background-color: rgba(255,255,255,0.9);
 }
 
-.semester-card h3 {
-  margin-top: 0;
+.semestre h2 {
   text-align: center;
+  color: #003366;
 }
 
-.course {
-  padding: 6px 8px;
-  margin: 4px 0;
+.ramo {
+  margin: 5px 0;
+  padding: 5px;
   border-radius: 5px;
   cursor: pointer;
-  color: black;
+  transition: 0.3s;
 }
 
-.course.done { background: green; color: white; }
-.course.available { background: #00ffff; color: black; }
-.course.locked { background: gray; color: white; cursor: not-allowed; }
-
-.controls {
-  margin: 20px;
-  max-width: 300px;
-}
+.ramo.aprobado { background-color: green; color: white; }
+.ramo.bloqueado { background-color: grey; color: white; cursor: not-allowed; }
+.ramo.disponible { background-color: #66ccff; color: black; }
 
 .footer {
   text-align: center;
   padding: 10px;
-  background: #00aaff;
+  background-color: #0099cc;
   color: white;
-  position: relative;
-  z-index: 2;
+  margin-top: 20px;
 }
 
-/* Jeringas de fondo */
+/* Jeringas flotando */
 .syringe {
-  position: fixed;
-  font-size: 24px;
-  animation: floatSyringe 15s linear infinite;
-  z-index: 0;
-  pointer-events: none;
-  opacity: 0.2;
+  position: absolute;
+  top: -50px;
+  font-size: 20px;
+  animation: caer linear infinite;
 }
 
-@keyframes floatSyringe {
+@keyframes caer {
   0% { transform: translateY(-50px) rotate(0deg); }
-  50% { transform: translateY(100vh) rotate(180deg); }
-  100% { transform: translateY(-50px) rotate(360deg); }
+  100% { transform: translateY(120vh) rotate(360deg); }
 }
+
