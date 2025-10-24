@@ -1,7 +1,5 @@
-// --- Malla Interactiva Enfermería UBO 2025 ---
-// --- Todos los semestres (1° a 10°) ---
-
-export const COURSES = [
+// --- Cursos completos 1° a 10° Semestre ---
+const COURSES = [
   // 1° Semestre
   { semestre: "1° Semestre", nombre: "Fundamentos de Biología y Genética Humana", prerreq: [] },
   { semestre: "1° Semestre", nombre: "Bases Químicas y Bioquímicas de la Vida", prerreq: [] },
@@ -38,7 +36,7 @@ export const COURSES = [
   { semestre: "5° Semestre", nombre: "Ética y Bioética en Enfermería", prerreq: ["Gestión del Cuidado en Enfermería IV"] },
   { semestre: "5° Semestre", nombre: "Gestión del Cuidado en Comunidades I", prerreq: ["Enfermería en Salud Pública y Determinantes Sociales","Integrado Fisiología, Fisiopatología y Farmacología en Enfermería II"] },
   { semestre: "5° Semestre", nombre: "Gestión del Cuidado en el Adulto", prerreq: ["Integrado Fisiología, Fisiopatología y Farmacología en Enfermería II","Gestión del Cuidado en Enfermería IV","Práctica Integrada en Enfermería IV"] },
-  { semestre: "5° Semestre", nombre: "Gestión del Cuidado en la Persona Mayor", prerreq: ["Integrado Fisiología Fisiopatología y Farmacología en Enfermería II","Gestión del Cuidado en Enfermería IV","Práctica Integrada en Enfermería IV"] },
+  { semestre: "5° Semestre", nombre: "Gestión del Cuidado en la Persona Mayor", prerreq: ["Integrado Fisiología, Fisiopatología y Farmacología en Enfermería II","Gestión del Cuidado en Enfermería IV","Práctica Integrada en Enfermería IV"] },
   { semestre: "5° Semestre", nombre: "Planificación Estratégica I", prerreq: ["Gestión del Cuidado en Enfermería IV"] },
   { semestre: "5° Semestre", nombre: "Práctica Integrada en Enfermería V", prerreq: ["Práctica Integrada en Enfermería IV","Enfermería en Salud Pública y Determinantes Sociales"] },
 
@@ -57,7 +55,7 @@ export const COURSES = [
   { semestre: "7° Semestre", nombre: "Práctica Integrada en Enfermería VII", prerreq: ["Salud Ocupacional","Práctica Integrada en Enfermería VI"] },
 
   // 8° Semestre
-  { semestre: "8° Semestre", nombre: "Seminario de Investigación en Enfermería II", prerreq: ["Seminario de Investigación en Enfermería I"] },
+  { semestre: "8° Semestre", nombre: "Seminario de Investigación en Enfermería II", prerreq: ["Seminario de investigación en Enfermería I"] },
   { semestre: "8° Semestre", nombre: "Gestión del Cuidado en la Infancia y Adolescencia II", prerreq: ["Gestión del Cuidado en la Infancia y Adolescencia I","Práctica Integrada en Enfermería VII"] },
   { semestre: "8° Semestre", nombre: "Gestión del Cuidado en Urgencias", prerreq: ["Gestión del Cuidado en la Infancia y Adolescencia I","Práctica Integrada en Enfermería VII"] },
   { semestre: "8° Semestre", nombre: "Gestión del Cuidado en Salud Mental y Psiquiatría", prerreq: ["Gestión del Cuidado en la Infancia y Adolescencia I","Práctica Integrada en Enfermería VII"] },
@@ -77,13 +75,14 @@ export const COURSES = [
   { semestre: "10° Semestre", nombre: "Práctica Profesional en Enfermería Hospitalaria (Opción B)", prerreq: ["Cuidados de Enfermería en Adulto Crítico (Opción B)","Enfermería en Unidades Quirúrgicas del Adulto (Opción B)"] }
 ];
 
-// --- Jeringas flotando ---
-for(let i=0;i<15;i++){
+// --- Jeringas flotando de fondo ---
+for(let i=0;i<20;i++){
   const syringe = document.createElement('div');
   syringe.className='syringe';
   syringe.textContent='💉';
   syringe.style.left=Math.random()*window.innerWidth+'px';
-  syringe.style.animationDelay=(Math.random()*5)+'s';
+  syringe.style.animationDelay=(Math.random()*15)+'s';
+  syringe.style.fontSize=(16+Math.random()*24)+'px';
   document.body.appendChild(syringe);
 }
 
@@ -93,16 +92,16 @@ const resetBtn = document.getElementById("resetBtn");
 const selectedCount = document.getElementById("selectedCount");
 let state = JSON.parse(localStorage.getItem("mallaState")) || {};
 
-function saveState() { localStorage.setItem("mallaState", JSON.stringify(state)); }
+function saveState(){ localStorage.setItem("mallaState", JSON.stringify(state)); }
 
-function updateCount() {
-  const done = Object.values(state).filter(v => v==="done").length;
+function updateCount(){
+  const done = Object.values(state).filter(v=>v==="done").length;
   selectedCount.textContent = `Seleccionados: ${done}`;
 }
 
 // Agrupar por semestre
 const semestres = {};
-COURSES.forEach(c => {
+COURSES.forEach(c=>{
   if(!semestres[c.semestre]) semestres[c.semestre]=[];
   semestres[c.semestre].push(c);
 });
@@ -112,14 +111,13 @@ function render(){
   Object.entries(semestres).forEach(([semestre, cursos])=>{
     const card = document.createElement("div");
     card.className="semester-card";
-    card.innerHTML = `<h3>${semestre} 💉</h3><div class='courses'></div>`;
+    card.innerHTML=`<h3>${semestre} 💉</h3><div class='courses'></div>`;
     const list = card.querySelector(".courses");
 
     cursos.forEach(curso=>{
-      const el = document.createElement("div");
-      const key = curso.nombre;
-      const status = state[key] || "locked";
-
+      const el=document.createElement("div");
+      const key=curso.nombre;
+      const status=state[key]||"locked";
       const canUnlock = curso.prerreq.length===0 || curso.prerreq.every(p=>state[p]==="done");
       const cssClass = status==="done" ? "done" : canUnlock ? "available" : "locked";
       el.className = "course "+cssClass;
@@ -141,7 +139,7 @@ function render(){
   updateCount();
 }
 
-resetBtn.addEventListener("click",()=>{
+resetBtn.addEventListener("click", ()=>{
   if(confirm("¿Seguro que quieres reiniciar la malla?")){
     state={};
     saveState();
