@@ -1,4 +1,4 @@
-// --- Malla completa actualizada ---
+// --- Malla completa con prerrequisitos ---
 const malla = {
   "Primer semestre": [
     { nombre: "Fundamentos de Biología y Genética Humana" },
@@ -61,82 +61,78 @@ const malla = {
     { nombre: "Gestión del Cuidado en Salud Mental y Psiquiatría", prerrequisitos: ["Gestión del Cuidado en la infancia y adolescencia I","Práctica Integrada en Enfermería VII"] },
     { nombre: "Gestión del Cuidado en Oncología y Cuidados Paliativos", prerrequisitos: ["Gestión del Cuidado en la infancia y adolescencia I","Gestión del Cuidado en Comunidades III","Práctica Integrada en Enfermería VII"] },
     { nombre: "Práctica Integrada en Enfermería VIII", prerrequisitos: ["Práctica Integrada en Enfermería VII","Gestión del Cuidado en la infancia y adolescencia I"] }
-  ],
-  "Noveno semestre": [
-    { nombre: "Intervención de Enfermería en Salud Comunitaria (Opción A)", prerrequisitos: ["Todas las asignaturas anteriores"] },
-    { nombre: "Enfermería en Salud Familiar (Opción A)", prerrequisitos: ["Todas las asignaturas anteriores"] },
-    { nombre: "Práctica Profesional en Enfermería Hospitalaria (Opción A)", prerrequisitos: ["Todas las asignaturas anteriores"] }
-  ],
-  "Décimo semestre": [
-    { nombre: "Práctica Profesional en Enfermería en Atención Primaria de Salud (Opción A)", prerrequisitos: ["Intervención de Enfermería en Salud Comunitaria (Opción A)","Enfermería en Salud Familiar (Opción A)"] },
-    { nombre: "Práctica Profesional en Enfermería Hospitalaria (Opción B)", prerrequisitos: ["Cuidados de Enfermería en Adulto Crítico (Opción B)","Enfermería en Unidades Quirúrgicas del Adulto (Opción B)"] }
   ]
 };
 
-// --- Fondo de jeringas ---
-for(let i=0;i<20;i++){
-  const s=document.createElement('div');
-  s.className='syringe';
-  s.textContent='💉';
-  s.style.left=Math.random()*window.innerWidth+'px';
-  s.style.animationDelay=(Math.random()*15)+'s';
-  s.style.fontSize=(16+Math.random()*24)+'px';
-  document.body.appendChild(s);
-}
-
+// --- Manejo de aprobados ---
 const aprobados = new Set();
 
-function puedeDesbloquear(prerequisitos){
-  return (prerequisitos || []).every(r=>aprobados.has(r) || r==="Todas las asignaturas anteriores");
+function puedeDesbloquear(prerequisitos) {
+  return (prerequisitos || []).every(req => aprobados.has(req));
 }
 
-function actualizarEstadoRamos(){
-  document.querySelectorAll('.ramo').forEach(div=>{
-    const nombre=div.dataset.nombre;
-    const prerequisitos=JSON.parse(div.dataset.prerequisitos || '[]');
-    if(aprobados.has(nombre)){
-      div.classList.add('aprobado');
-      div.classList.remove('bloqueado');
-      div.classList.remove('disponible');
-    }else if(puedeDesbloquear(prerequisitos)){
-      div.classList.add('disponible');
-      div.classList.remove('bloqueado');
-      div.classList.remove('aprobado');
-    }else{
-      div.classList.add('bloqueado');
-      div.classList.remove('aprobado');
-      div.classList.remove('disponible');
+function actualizarEstadoRamos() {
+  document.querySelectorAll('.ramo').forEach(divRamo => {
+    const nombre = divRamo.dataset.nombre;
+    const prerequisitos = JSON.parse(divRamo.dataset.prerequisitos || '[]');
+    if (aprobados.has(nombre)) {
+      divRamo.classList.remove('bloqueado');
+      divRamo.classList.add('aprobado');
+    } else if (puedeDesbloquear(prerequisitos)) {
+      divRamo.classList.remove('bloqueado');
+      divRamo.classList.remove('aprobado');
+    } else {
+      divRamo.classList.add('bloqueado');
+      divRamo.classList.remove('aprobado');
     }
   });
 }
 
-function crearMallaInteractiva(){
-  const cont=document.getElementById('malla-container');
-  cont.innerHTML='';
-  for(const [semestre,ramos] of Object.entries(malla)){
-    const divS=document.createElement('div');
-    divS.className='semestre';
-    divS.innerHTML=`<h2>${semestre}</h2>`;
-    ramos.forEach(r=>{
-      const divR=document.createElement('div');
-      divR.className='ramo bloqueado';
-      divR.textContent=r.nombre;
-      divR.dataset.nombre=r.nombre;
-      divR.dataset.prerequisitos=JSON.stringify(r.prerrequisitos||[]);
-      divR.addEventListener('click',()=>{
-        if(puedeDesbloquear(r.prerrequisitos)){
-          aprobados.has(r.nombre)?aprobados.delete(r.nombre):aprobados.add(r.nombre);
+function crearMallaInteractiva() {
+  const contenedor = document.getElementById("malla-container");
+
+  // Crear emojis de fondo
+  for (let i = 0; i < 30; i++) {
+    const emoji = document.createElement("div");
+    emoji.className = "fondo-emoji";
+    emoji.style.left = Math.random() * 100 + "vw";
+    emoji.style.animationDuration = (5 + Math.random() * 5) + "s";
+    emoji.textContent = Math.random() > 0.5 ? "💉" : "🩸";
+    document.body.appendChild(emoji);
+  }
+
+  for (const [semestre, ramos] of Object.entries(malla)) {
+    const divSemestre = document.createElement("div");
+    divSemestre.className = "semestre";
+    divSemestre.innerHTML = `<h2>${semestre}</h2>`;
+
+    ramos.forEach(ramo => {
+      const divRamo = document.createElement("div");
+      divRamo.className = "ramo bloqueado";
+      divRamo.textContent = ramo.nombre;
+      divRamo.dataset.nombre = ramo.nombre;
+      divRamo.dataset.prerequisitos = JSON.stringify(ramo.prerrequisitos || []);
+
+      divRamo.addEventListener("click", () => {
+        if (puedeDesbloquear(ramo.prerrequisitos)) {
+          if (aprobados.has(ramo.nombre)) {
+            aprobados.delete(ramo.nombre);
+          } else {
+            aprobados.add(ramo.nombre);
+          }
           actualizarEstadoRamos();
-        }else{
-          alert("Aún no cumples los prerrequisitos de: "+r.nombre);
+        } else {
+          alert("Aún no cumples con los prerrequisitos para: " + ramo.nombre);
         }
       });
-      divS.appendChild(divR);
+
+      divSemestre.appendChild(divRamo);
     });
-    cont.appendChild(divS);
+
+    contenedor.appendChild(divSemestre);
   }
+
   actualizarEstadoRamos();
 }
 
-document.addEventListener('DOMContentLoaded',crearMallaInteractiva);
-
+document.addEventListener("DOMContentLoaded", crearMallaInteractiva);
