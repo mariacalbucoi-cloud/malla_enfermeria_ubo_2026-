@@ -1,46 +1,55 @@
-/* Reset básico */
+/* Reset básico para html y body */
 html, body {
   margin: 0;
   padding: 0;
   width: 100%;
   height: 100%;
   font-family: "Times New Roman", serif;
-  background-color: #b3d9ff;
-  color: #31708e;
+  background-color: #b3d9ff; /* celeste pastel sólido */
   overflow-x: hidden;
   position: relative;
+  color: #31708e; /* azul oscuro suave */
 }
 
-/* Fondo animado emojis */
-.fondo-emoji {
-  position: absolute;
-  top: -50px;
-  font-size: 24px;
-  pointer-events: none;
-  animation: caer linear infinite;
+/* Fondo animado de jeringas y gotas de sangre */
+body::before {
+  content: "💉🩸💉🩸💉🩸";
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  font-size: 5rem;
+  opacity: 0.1;
+  white-space: pre;
+  animation: floatBackground 60s linear infinite;
 }
 
-@keyframes caer {
-  0% { transform: translateY(-50px) rotate(0deg); }
-  100% { transform: translateY(120vh) rotate(360deg); }
+@keyframes floatBackground {
+  0% { transform: translate(0,0) rotate(0deg); }
+  50% { transform: translate(200%,200%) rotate(180deg); }
+  100% { transform: translate(0,0) rotate(360deg); }
 }
 
-/* Header */
+/* Header centrado y estilizado */
 header {
   width: 100%;
   padding: 1rem 0;
   text-align: center;
+  box-sizing: border-box;
+  margin: 0 auto;
+  background-color: #d9ecff;
+  border-bottom: 2px solid #9dcde1;
 }
 
 header h1 {
   margin: 0;
   font-size: 2.5rem;
-  color: #2f4f6f;
+  color: #2f4f6f; /* tono azul */
 }
 
 header p {
   margin: 0;
   font-size: 1.2rem;
+  color: #31708e;
 }
 
 /* Contenedor principal */
@@ -49,28 +58,26 @@ header p {
   flex-wrap: wrap;
   justify-content: center;
   padding: 1rem;
-  position: relative;
-  z-index: 1;
 }
 
-/* Semestres */
+/* Estilo para cada semestre */
 .semestre {
-  border: 2px solid #9dcde1;
+  border: 2px solid #9dcde1; /* azul pastel */
   padding: 1rem;
   margin: 1rem;
   border-radius: 10px;
   width: 300px;
-  background-color: #d9ecff;
+  background-color: #d9ecff; /* celeste muy claro */
 }
 
-/* Ramos */
+/* Cada ramo (asignatura) */
 .ramo {
   cursor: pointer;
   margin-bottom: 8px;
   padding: 6px;
   border-radius: 6px;
   border: 1px solid #9dcde1;
-  background-color: #f0f8ff;
+  background-color: #f0f8ff; /* azul pastel clarito */
   color: #1e3d59;
   user-select: none;
   transition: background-color 0.3s ease, border-color 0.3s ease;
@@ -89,7 +96,7 @@ header p {
   opacity: 0.6;
 }
 
-/* Footer */
+/* Pie de página */
 footer {
   text-align: center;
   padding: 1rem 0;
