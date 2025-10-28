@@ -70,7 +70,6 @@ const malla = {
 };
 
 const aprobados = new Set();
-let jeringas = [];
 
 function puedeDesbloquear(prerequisitos) {
   return (prerequisitos || []).every(req => aprobados.has(req));
@@ -91,7 +90,6 @@ function actualizarEstadoRamos() {
       divRamo.classList.remove('aprobado');
     }
   });
-  checkMallaCompleta();
 }
 
 function crearMallaInteractiva() {
@@ -132,51 +130,18 @@ function crearMallaInteractiva() {
   crearJeringas();
 }
 
+// Jeringas flotantes
 function crearJeringas() {
-  const cantidad = 100;
-  for (let i = 0; i < cantidad; i++) {
-    const jeringa = document.createElement("div");
-    jeringa.className = "jeringa";
-    jeringa.style.left = Math.random() * window.innerWidth + "px";
-    jeringa.style.top = Math.random() * window.innerHeight + "px";
-    jeringa.style.animation = `caer ${3 + Math.random()*5}s linear infinite`;
-    document.body.appendChild(jeringa);
-    jeringas.push(jeringa);
-  }
-}
-
-function checkMallaCompleta() {
-  const totalRamos = Object.values(malla).flat().length;
-  if (aprobados.size === totalRamos) {
-    // Borrar malla
-    document.getElementById("malla-container").remove();
-    document.querySelectorAll('.jeringa').forEach(j => j.remove());
-
-    // Mostrar felicitaciones y serpentinas
-    const fel = document.getElementById("felicitaciones");
-    fel.classList.remove("hidden");
-    crearSerpentinas();
-  }
-}
-
-function crearSerpentinas() {
-  const cantidad = 150;
-  const alturaMax = window.innerHeight/2;
-  for (let i = 0; i < cantidad; i++) {
-    const s = document.createElement("div");
-    s.className = "serpentina";
-    s.style.left = Math.random()*window.innerWidth + "px";
-    s.style.top = -50 + "px";
-    s.style.backgroundColor = `hsl(${Math.random()*360}, 100%, 50%)`;
-    document.body.appendChild(s);
-
-    let pos = -50;
-    const velocidad = 2 + Math.random()*3;
-    const int = setInterval(() => {
-      pos += velocidad;
-      s.style.top = pos + "px";
-      if(pos >= alturaMax) clearInterval(int);
-    }, 16);
+  const num = 100;
+  for(let i=0; i<num; i++){
+    const j = document.createElement('div');
+    j.textContent = "💉";
+    j.className = "jeringa";
+    j.style.left = Math.random()*window.innerWidth + "px";
+    j.style.top = Math.random()*window.innerHeight + "px";
+    j.style.fontSize = (10+Math.random()*20) + "px";
+    j.style.animationDuration = (10+Math.random()*20) + "s";
+    document.body.appendChild(j);
   }
 }
 
