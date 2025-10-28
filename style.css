@@ -1,22 +1,18 @@
-/* Reset básico */
 html, body {
   margin: 0;
   padding: 0;
   width: 100%;
   height: 100%;
   font-family: "Times New Roman", serif;
-  background-color: #b3d9ff; /* celeste pastel */
+  background-color: #b3d9ff;
+  color: #31708e;
   overflow-x: hidden;
-  position: relative;
 }
 
-/* Header */
 header {
   width: 100%;
   padding: 1rem 0;
   text-align: center;
-  box-sizing: border-box;
-  margin: 0 auto;
 }
 
 header h1 {
@@ -31,17 +27,13 @@ header p {
   color: #31708e;
 }
 
-/* Contenedor principal */
 #malla-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   padding: 1rem;
-  position: relative;
-  z-index: 2;
 }
 
-/* Semestre */
 .semestre {
   border: 2px solid #9dcde1;
   padding: 1rem;
@@ -49,11 +41,8 @@ header p {
   border-radius: 10px;
   width: 300px;
   background-color: #d9ecff;
-  z-index: 2;
-  position: relative;
 }
 
-/* Cada asignatura */
 .ramo {
   cursor: pointer;
   margin-bottom: 8px;
@@ -64,28 +53,26 @@ header p {
   color: #1e3d59;
   user-select: none;
   transition: background-color 0.3s ease, border-color 0.3s ease;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-/* Estado aprobado */
 .ramo.aprobado {
   background-color: #c1e8c1;
   border-color: #4caf50;
 }
 
-/* Estado bloqueado */
 .ramo.bloqueado {
-  background-color: #dcdcdc;
-  border-color: #a9a9a9;
-  opacity: 0.8;
+  background-color: #d3d3d3;
+  border-color: #a0a0a0;
 }
 
-/* Emoji de candado en bloqueado */
 .ramo.bloqueado::after {
-  content: " 🔒";
-  margin-left: 5px;
+  content: "🔒";
+  margin-left: 6px;
 }
 
-/* Footer */
 footer {
   text-align: center;
   padding: 1rem 0;
@@ -94,17 +81,26 @@ footer {
   background-color: #d9ecff;
   border-top: 1px solid #9dcde1;
   margin-top: 2rem;
-  position: relative;
-  z-index: 2;
 }
 
-/* Canvas fondo jeringas */
-#fondo-jeringas {
+#jeringas-canvas, #serpentinas-canvas {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   pointer-events: none;
-  z-index: 1;
+  z-index: -1;
+}
+
+#felicitaciones {
+  display: none;
+  position: fixed;
+  top: 40%;
+  width: 100%;
+  text-align: center;
+  font-size: 3rem;
+  font-weight: bold;
+  color: #004080;
+  z-index: 1000;
 }
