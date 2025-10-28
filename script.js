@@ -79,7 +79,11 @@ const malla = {
 const aprobados = new Set();
 
 function puedeDesbloquear(prerequisitos) {
-  return (prerequisitos || []).every(req => aprobados.has(req));
+  if (!prerequisitos || prerequisitos.length === 0) return true;
+  if (prerequisitos.includes("Todas las anteriores")) {
+    return Object.keys(malla).flatMap(s => malla[s].map(r => r.nombre)).every(r => aprobados.has(r));
+  }
+  return prerequisitos.every(req => aprobados.has(req));
 }
 
 function actualizarEstadoRamos() {
@@ -117,11 +121,8 @@ function crearMallaInteractiva() {
 
       divRamo.addEventListener("click", () => {
         if (puedeDesbloquear(ramo.prerequisitos)) {
-          if (aprobados.has(ramo.nombre)) {
-            aprobados.delete(ramo.nombre);
-          } else {
-            aprobados.add(ramo.nombre);
-          }
+          if (aprobados.has(ramo.nombre)) aprobados.delete(ramo.nombre);
+          else aprobados.add(ramo.nombre);
           actualizarEstadoRamos();
         } else {
           alert("Aún no cumples con los prerrequisitos para: " + ramo.nombre);
@@ -136,44 +137,37 @@ function crearMallaInteractiva() {
   actualizarEstadoRamos();
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  crearMallaInteractiva();
-  iniciarJeringas();
-});
-
-/* Función para animación de jeringas flotando */
-function iniciarJeringas() {
-  const canvas = document.getElementById('canvas');
+// Fondo animado con emojis de jeringa
+function animarFondo() {
+  const canvas = document.getElementById('fondo');
   const ctx = canvas.getContext('2d');
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
 
-  const jeringas = [];
-  const total = 100;
-
-  for(let i=0;i<total;i++){
-    jeringas.push({
-      x: Math.random()*canvas.width,
-      y: Math.random()*canvas.height,
-      size: 20 + Math.random()*20,
-      speed: 1 + Math.random()*2
+  const emojis = [];
+  for (let i = 0; i < 200; i++) {
+    emojis.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      size: 20 + Math.random() * 20,
+      speed: 0.5 + Math.random()
     });
   }
 
-  function draw() {
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    jeringas.forEach(j => {
-      ctx.font = j.size + "px Arial";
-      ctx.fillText("💉", j.x, j.y);
-      j.y += j.speed;
-      if(j.y > canvas.height) j.y = -j.size;
+  function dibujar() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    emojis.forEach(e => {
+      ctx.font = `${e.size}px Arial`;
+      ctx.fillText("💉", e.x, e.y);
+      e.y += e.speed;
+      if (e.y > canvas.height) e.y = -20;
     });
-    requestAnimationFrame(draw);
+    requestAnimationFrame(dibujar);
   }
-  draw();
-
-  window.addEventListener('resize', () => {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-  });
+  dibujar();
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+  crearMallaInteractiva();
+  animarFondo();
+});
