@@ -8,7 +8,6 @@ html, body {
   background-color: #b3d9ff; /* celeste pastel */
   overflow-x: hidden;
   position: relative;
-  color: #31708e;
 }
 
 /* Header */
@@ -16,14 +15,14 @@ header {
   width: 100%;
   padding: 1rem 0;
   text-align: center;
+  box-sizing: border-box;
+  margin: 0 auto;
 }
-
 header h1 {
   margin: 0;
   font-size: 2.5rem;
   color: #2f4f6f;
 }
-
 header p {
   margin: 0;
   font-size: 1.2rem;
@@ -36,8 +35,6 @@ header p {
   flex-wrap: wrap;
   justify-content: center;
   padding: 1rem;
-  position: relative;
-  z-index: 1;
 }
 
 /* Semestres */
@@ -50,7 +47,7 @@ header p {
   background-color: #d9ecff;
 }
 
-/* Asignaturas */
+/* Ramo */
 .ramo {
   cursor: pointer;
   margin-bottom: 8px;
@@ -72,10 +69,9 @@ header p {
 /* Estado bloqueado */
 .ramo.bloqueado {
   background-color: #d3d3d3;
-  border-color: #a9a9a9;
+  border-color: #999;
+  color: #666;
 }
-
-/* Candado junto al nombre */
 .ramo.bloqueado::after {
   content: " 🔒";
 }
@@ -89,56 +85,20 @@ footer {
   background-color: #d9ecff;
   border-top: 1px solid #9dcde1;
   margin-top: 2rem;
-  position: relative;
-  z-index: 1;
 }
 
-/* Fondo de jeringas */
+/* Jeringas flotando */
 .jeringa {
   position: absolute;
-  width: 24px;
-  height: 24px;
-  background-image: url('https://em-content.zobj.net/source/noto-emoji-symbols/344/syringe_1f489.png');
-  background-size: cover;
-  opacity: 0.5;
-  pointer-events: none;
-  z-index: 0;
+  font-size: 24px;
+  opacity: 0.3;
+  animation-name: flotar;
+  animation-duration: 20s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
 }
 
-/* Felicitaciones */
-#felicitaciones {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: #b3d9ff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  z-index: 10;
-}
-
-#felicitaciones h1 {
-  font-size: 4rem;
-  color: #2f4f6f;
-  text-align: center;
-  margin: 0;
-}
-
-.hidden {
-  display: none;
-}
-
-/* Serpentinas */
-.serpentina {
-  position: absolute;
-  width: 10px;
-  height: 50px;
-  background-color: red;
-  opacity: 0.7;
-  transform: rotate(0deg);
-  z-index: 11;
-  border-radius: 2px;
+@keyframes flotar {
+  0% { transform: translateY(-50px) translateX(0px) rotate(0deg); }
+  100% { transform: translateY(110vh) translateX(50px) rotate(360deg); }
 }
