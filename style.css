@@ -1,35 +1,32 @@
-/* Reset básico */
+/* Base general */
 html, body {
   margin: 0;
   padding: 0;
   width: 100%;
   height: 100%;
   font-family: "Times New Roman", serif;
-  background-color: #b3d9ff; /* celeste pastel */
+  background-color: #b3d9ff;
   overflow-x: hidden;
   position: relative;
 }
 
-/* Header */
+/* Encabezado */
 header {
-  width: 100%;
-  padding: 1rem 0;
   text-align: center;
-  box-sizing: border-box;
-  margin: 0 auto;
+  padding: 1rem 0;
+  color: #2f4f6f;
 }
 header h1 {
   margin: 0;
   font-size: 2.5rem;
-  color: #2f4f6f;
 }
 header p {
   margin: 0;
   font-size: 1.2rem;
-  color: #31708e;
+  color: #295b79;
 }
 
-/* Contenedor principal */
+/* Contenedor general */
 #malla-container {
   display: flex;
   flex-wrap: wrap;
@@ -37,36 +34,36 @@ header p {
   padding: 1rem;
 }
 
-/* Semestres */
+/* Tarjetas de semestre */
 .semestre {
-  border: 2px solid #9dcde1;
+  border: 2px solid #8ac6e4;
+  border-radius: 12px;
+  background-color: #d9ecff;
   padding: 1rem;
   margin: 1rem;
-  border-radius: 10px;
   width: 300px;
-  background-color: #d9ecff;
+}
+.semestre h2 {
+  text-align: center;
+  color: #204060;
 }
 
 /* Ramo */
 .ramo {
   cursor: pointer;
-  margin-bottom: 8px;
-  padding: 6px;
-  border-radius: 6px;
-  border: 1px solid #9dcde1;
   background-color: #f0f8ff;
   color: #1e3d59;
+  border: 1px solid #9dcde1;
+  border-radius: 6px;
+  padding: 6px;
+  margin-bottom: 6px;
   user-select: none;
   transition: background-color 0.3s ease, border-color 0.3s ease;
 }
-
-/* Estado aprobado */
 .ramo.aprobado {
   background-color: #c1e8c1;
   border-color: #4caf50;
 }
-
-/* Estado bloqueado */
 .ramo.bloqueado {
   background-color: #d3d3d3;
   border-color: #999;
@@ -76,29 +73,28 @@ header p {
   content: " 🔒";
 }
 
-/* Footer */
+/* Pie de página */
 footer {
   text-align: center;
   padding: 1rem 0;
-  color: #2f4f6f;
-  font-size: 0.9rem;
   background-color: #d9ecff;
   border-top: 1px solid #9dcde1;
-  margin-top: 2rem;
+  color: #2f4f6f;
 }
 
-/* Jeringas flotando */
+/* Fondo con jeringas flotantes */
 .jeringa {
   position: absolute;
   font-size: 24px;
   opacity: 0.3;
-  animation-name: flotar;
-  animation-duration: 20s;
-  animation-iteration-count: infinite;
-  animation-timing-function: linear;
+  animation: flotar linear infinite;
 }
 
 @keyframes flotar {
-  0% { transform: translateY(-50px) translateX(0px) rotate(0deg); }
-  100% { transform: translateY(110vh) translateX(50px) rotate(360deg); }
+  0% {
+    transform: translateY(-50px) translateX(0px) rotate(0deg);
+  }
+  100% {
+    transform: translateY(110vh) translateX(50px) rotate(360deg);
+  }
 }
