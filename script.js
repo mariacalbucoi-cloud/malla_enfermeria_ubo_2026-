@@ -1,88 +1,82 @@
-// ------------------ Variables ------------------
-const aprobados = new Set();
-
 const malla = {
   "Primer semestre": [
-    { nombre: "Habilidades Académicas I" },
-    { nombre: "Inglés I" },
     { nombre: "Fundamentos de Biología y Genética Humana" },
     { nombre: "Bases Químicas y Bioquímicas de la Vida" },
     { nombre: "Gestión del Cuidado en Enfermería I" },
-    { nombre: "Educación en Enfermería I" }
+    { nombre: "Educación en Enfermería" },
+    { nombre: "Identidad Universitaria I" },
+    { nombre: "Lengua Extranjera I" },
+    { nombre: "Práctica Integrada en Enfermería I" }
   ],
   "Segundo semestre": [
-    { nombre: "Habilidades Académicas II", prerequisitos: ["Habilidades Académicas I"] },
-    { nombre: "Inglés II", prerequisitos: ["Inglés I"] },
-    { nombre: "Morfología Micro y Macroscópica", prerequisitos: ["Fundamentos de Biología y Genética Humana"] },
-    { nombre: "Microbiología y Agentes Infecciosos", prerequisitos: ["Bases Químicas y Bioquímicas de la Vida"] },
+    { nombre: "Lengua Extranjera II", prerequisitos: ["Lengua Extranjera I"] },
+    { nombre: "Identidad Universitaria II", prerequisitos: ["Identidad Universitaria I"] },
     { nombre: "Gestión del Cuidado en Enfermería II", prerequisitos: ["Gestión del Cuidado en Enfermería I"] },
-    { nombre: "Educación en Enfermería II", prerequisitos: ["Educación en Enfermería I"] }
+    { nombre: "Matemáticas y Herramientas Informáticas para la Gestión en Salud", prerequisitos: ["Educación en Enfermería"] },
+    { nombre: "Práctica Integrada en Enfermería II", prerequisitos: ["Práctica Integrada en Enfermería I"] },
+    { nombre: "Morfología Micro y Macroscópica", prerequisitos: ["Fundamentos de Biología y Genética Humana"] },
+    { nombre: "Microbiología y Agentes Infecciosos", prerequisitos: ["Bases Químicas y Bioquímicas de la Vida"] }
   ],
   "Tercer semestre": [
-    { nombre: "Ética y Ciudadanía" },
-    { nombre: "Inglés III", prerequisitos: ["Inglés II"] },
-    { nombre: "Fisiología y Fisiopatología de Sistemas I", prerequisitos: ["Morfología Micro y Macroscópica"] },
+    { nombre: "Lengua Extranjera III", prerequisitos: ["Lengua Extranjera II"] },
     { nombre: "Gestión del Cuidado en Enfermería III", prerequisitos: ["Gestión del Cuidado en Enfermería II"] },
-    { nombre: "Enfermería en Salud Pública y Determinantes Sociales en Salud", prerequisitos: ["Educación en Enfermería II"] },
-    { nombre: "Socio Antropología en Humanización del Cuidado" },
-    { nombre: "Práctica Integrada en Enfermería I", prerequisitos: ["Gestión del Cuidado en Enfermería II"] }
+    { nombre: "Práctica Integrada en Enfermería III", prerequisitos: ["Práctica Integrada en Enfermería II"] },
+    { nombre: "Integrado de Fisiología, Fisiopatología y Farmacología en Enfermería I", prerequisitos: ["Morfología Micro y Macroscópica"] }
   ],
   "Cuarto semestre": [
-    { nombre: "Responsabilidad Social Universitaria", prerequisitos: ["Ética y Ciudadanía"] },
-    { nombre: "Inglés IV", prerequisitos: ["Inglés III"] },
-    { nombre: "Fisiología y Fisiopatología de Sistemas II", prerequisitos: ["Fisiología y Fisiopatología de Sistemas I"] },
-    { nombre: "Farmacología Clínica Fundamental", prerequisitos: ["Microbiología y Agentes Infecciosos"] },
-    { nombre: "Gestión en Servicios de Salud", prerequisitos: ["Gestión del Cuidado en Enfermería III"] },
-    { nombre: "Matemáticas, TICs e Informática" },
-    { nombre: "Práctica Integrada en Enfermería II", prerequisitos: ["Gestión del Cuidado en Enfermería III", "Práctica Integrada en Enfermería I"] }
+    { nombre: "Lengua Extranjera IV", prerequisitos: ["Lengua Extranjera III"] },
+    { nombre: "Responsabilidad Social Universitaria", prerequisitos: ["Formación Ética para el Desarrollo Sostenible"] },
+    { nombre: "Gestión del Cuidado en Enfermería IV", prerequisitos: ["Gestión del Cuidado en Enfermería III","Práctica Integrada en Enfermería III"] },
+    { nombre: "Enfermería en Salud Pública y Determinantes Sociales", prerequisitos: ["Matemáticas y Herramientas Informáticas para la Gestión en Salud"] },
+    { nombre: "Integrado de Fisiología, Fisiopatología y Farmacología en Enfermería II", prerequisitos: ["Integrado de Fisiología, Fisiopatología y Farmacología en Enfermería I"] },
+    { nombre: "Práctica Integrada en Enfermería IV", prerequisitos: ["Práctica Integrada en Enfermería III","Gestión del Cuidado en Enfermería III"] }
   ],
   "Quinto semestre": [
-    { nombre: "Gestión del Cuidado en Comunidades I", prerequisitos: ["Enfermería en Salud Pública y Determinantes Sociales en Salud"] },
-    { nombre: "Gestión del Cuidado en el Adulto I", prerequisitos: ["Gestión del Cuidado en Enfermería III"] },
-    { nombre: "Metodología de la Investigación y Bioética", prerequisitos: ["Matemáticas, TICs e Informática"] },
-    { nombre: "Gestión del Cuidado en la Persona Mayor", prerequisitos: ["Gestión del Cuidado en Enfermería III", "Farmacología Clínica Fundamental", "Fisiología y Fisiopatología de Sistemas II"] },
-    { nombre: "Calidad y Gestión en el Cuidado", prerequisitos: ["Gestión en Servicios de Salud"] },
-    { nombre: "Práctica Integrada en Enfermería III", prerequisitos: ["Farmacología Clínica Fundamental", "Fisiología y Fisiopatología de Sistemas II", "Práctica Integrada en Enfermería II"] }
+    { nombre: "Ética y Bioética en Enfermería", prerequisitos: ["Gestión del Cuidado en Enfermería IV"] },
+    { nombre: "Gestión del Cuidado en Comunidades I", prerequisitos: ["Enfermería en Salud Pública y Determinantes Sociales","Integrado de Fisiología, Fisiopatología y Farmacología en Enfermería II"] },
+    { nombre: "Gestión del Cuidado en el Adulto", prerequisitos: ["Integrado de Fisiología, Fisiopatología y Farmacología en Enfermería II","Gestión del Cuidado en Enfermería IV","Práctica Integrada en Enfermería IV"] },
+    { nombre: "Gestión del Cuidado en la Persona Mayor", prerequisitos: ["Integrado de Fisiología, Fisiopatología y Farmacología en Enfermería II","Gestión del Cuidado en Enfermería IV","Práctica Integrada en Enfermería IV"] },
+    { nombre: "Planificación Estratégica I", prerequisitos: ["Gestión del Cuidado en Enfermería IV"] },
+    { nombre: "Práctica Integrada en Enfermería V", prerequisitos: ["Práctica Integrada en Enfermería IV","Enfermería en Salud Pública y Determinantes Sociales"] }
   ],
   "Sexto semestre": [
-    { nombre: "Proyecto de Investigación I", prerequisitos: ["Metodología de la Investigación y Bioética"] },
-    { nombre: "Gestión del Cuidado en Comunidades II", prerequisitos: ["Gestión del Cuidado en Comunidades I"] },
-    { nombre: "Gestión del Cuidado en el Adulto II", prerequisitos: ["Gestión del Cuidado en el Adulto I"] },
-    { nombre: "Gestión del Cuidado en la Mujer", prerequisitos: ["Farmacología Clínica Fundamental", "Fisiología y Fisiopatología de Sistemas II"] },
-    { nombre: "Electivo Formación General I" },
-    { nombre: "Práctica Integrada en Enfermería IV", prerequisitos: ["Gestión del Cuidado en Comunidades I"] }
+    { nombre: "Metodología de la Investigación", prerequisitos: ["Ética y Bioética en Enfermería"] },
+    { nombre: "Gestión del Cuidado en Comunidades II", prerequisitos: ["Gestión del Cuidado en Comunidades I","Práctica Integrada en Enfermería V"] },
+    { nombre: "Salud Ocupacional", prerequisitos: ["Gestión del Cuidado en el Adulto"] },
+    { nombre: "Planificación Estratégica II", prerequisitos: ["Planificación Estratégica I"] },
+    { nombre: "Práctica Integrada en Enfermería VI", prerequisitos: ["Práctica Integrada en Enfermería V","Gestión del Cuidado en Comunidades I"] }
   ],
   "Séptimo semestre": [
-    { nombre: "Proyecto de Investigación II", prerequisitos: ["Metodología de la Investigación y Bioética"] },
-    { nombre: "Gestión del Cuidado en Comunidades III", prerequisitos: ["Gestión del Cuidado en Comunidades II"] },
-    { nombre: "Gestión del Cuidado en Urgencias", prerequisitos: ["Gestión del Cuidado en el Adulto II"] },
-    { nombre: "Gestión del Cuidado en Niño y Adolescente I", prerequisitos: ["Gestión del Cuidado en la Mujer"] },
-    { nombre: "Gestión del Cuidado en Salud Mental I", prerequisitos: ["Gestión del Cuidado en el Adulto II"] },
-    { nombre: "Práctica Integrada en Enfermería V", prerequisitos: ["Gestión del Cuidado en la Mujer"] }
+    { nombre: "Seminario de Investigación en Enfermería I", prerequisitos: ["Metodología de la Investigación"] },
+    { nombre: "Gestión del Cuidado en Comunidades III", prerequisitos: ["Gestión del Cuidado en Comunidades II","Práctica Integrada en Enfermería VI"] },
+    { nombre: "Gestión del Cuidado en la Infancia y Adolescencia I", prerequisitos: ["Salud Ocupacional","Gestión del Cuidado en Comunidades II"] },
+    { nombre: "Bienestar Profesional", prerequisitos: ["Salud Ocupacional"] },
+    { nombre: "Práctica Integrada en Enfermería VII", prerequisitos: ["Salud Ocupacional","Práctica Integrada en Enfermería VI"] }
   ],
   "Octavo semestre": [
-    { nombre: "Gestión del Cuidado en Niño y Adolescente II", prerequisitos: ["Gestión del Cuidado en Niño y Adolescente I"] },
-    { nombre: "Gestión del Cuidado en Salud Mental II", prerequisitos: ["Gestión del Cuidado en Salud Mental I"] },
-    { nombre: "Cuidados de la Salud e Interculturalidad", prerequisitos: ["Gestión del Cuidado en Comunidades III"] },
-    { nombre: "Electivo Formación General II" },
-    { nombre: "Práctica Integrada en Enfermería VI", prerequisitos: ["Gestión del Cuidado en Urgencias"] }
+    { nombre: "Seminario de Investigación en Enfermería II", prerequisitos: ["Seminario de Investigación en Enfermería I"] },
+    { nombre: "Gestión del Cuidado en la Infancia y Adolescencia II", prerequisitos: ["Gestión del Cuidado en la Infancia y Adolescencia I","Práctica Integrada en Enfermería VII"] },
+    { nombre: "Gestión del Cuidado en Urgencias", prerequisitos: ["Gestión del Cuidado en la Infancia y Adolescencia I","Práctica Integrada en Enfermería VII"] },
+    { nombre: "Gestión del Cuidado en Salud Mental y Psiquiatría", prerequisitos: ["Gestión del Cuidado en la Infancia y Adolescencia I","Práctica Integrada en Enfermería VII"] },
+    { nombre: "Gestión del Cuidado en Oncología y Cuidados Paliativos", prerequisitos: ["Gestión del Cuidado en la Infancia y Adolescencia I","Gestión del Cuidado en Comunidades III","Práctica Integrada en Enfermería VII"] },
+    { nombre: "Práctica Integrada en Enfermería VIII", prerequisitos: ["Práctica Integrada en Enfermería VII","Gestión del Cuidado en la Infancia y Adolescencia I"] }
   ],
   "Noveno semestre": [
-    { nombre: "Práctica Profesional de Enfermería I", prerequisitos: ["Práctica Integrada en Enfermería VI"] }
+    { nombre: "Práctica Profesional en Enfermería I", prerequisitos: ["Práctica Integrada en Enfermería VIII"] }
   ],
   "Décimo semestre": [
-    { nombre: "Electivo de Profundización", prerequisitos: ["Práctica Integrada en Enfermería VI"] },
-    { nombre: "Práctica Profesional en Enfermería II", prerequisitos: ["Práctica Integrada en Enfermería VI"] }
+    { nombre: "Práctica Profesional en Enfermería II", prerequisitos: ["Práctica Integrada en Enfermería VIII"] }
   ]
 };
 
-// ------------------ Funciones ------------------
+const aprobados = new Set();
+let jeringas = [];
+
 function puedeDesbloquear(prerequisitos) {
   return (prerequisitos || []).every(req => aprobados.has(req));
 }
 
 function actualizarEstadoRamos() {
-  let todosAprobados = true;
   document.querySelectorAll('.ramo').forEach(divRamo => {
     const nombre = divRamo.dataset.nombre;
     const prerequisitos = JSON.parse(divRamo.dataset.prerequisitos || '[]');
@@ -92,112 +86,98 @@ function actualizarEstadoRamos() {
     } else if (puedeDesbloquear(prerequisitos)) {
       divRamo.classList.remove('bloqueado');
       divRamo.classList.remove('aprobado');
-      todosAprobados = false;
     } else {
       divRamo.classList.add('bloqueado');
       divRamo.classList.remove('aprobado');
-      todosAprobados = false;
     }
   });
-
-  if (todosAprobados) mostrarCelebracion();
+  checkMallaCompleta();
 }
 
 function crearMallaInteractiva() {
   const contenedor = document.getElementById("malla-container");
   contenedor.innerHTML = "";
+
   for (const [semestre, ramos] of Object.entries(malla)) {
     const divSemestre = document.createElement("div");
     divSemestre.className = "semestre";
     divSemestre.innerHTML = `<h2>${semestre}</h2>`;
+
     ramos.forEach(ramo => {
       const divRamo = document.createElement("div");
       divRamo.className = "ramo bloqueado";
       divRamo.textContent = ramo.nombre;
       divRamo.dataset.nombre = ramo.nombre;
       divRamo.dataset.prerequisitos = JSON.stringify(ramo.prerequisitos || []);
+
       divRamo.addEventListener("click", () => {
         if (puedeDesbloquear(ramo.prerequisitos)) {
-          if (aprobados.has(ramo.nombre)) aprobados.delete(ramo.nombre);
-          else aprobados.add(ramo.nombre);
+          if (aprobados.has(ramo.nombre)) {
+            aprobados.delete(ramo.nombre);
+          } else {
+            aprobados.add(ramo.nombre);
+          }
           actualizarEstadoRamos();
-        } else alert("Aún no cumples con los prerrequisitos para: " + ramo.nombre);
+        } else {
+          alert("Aún no cumples con los prerrequisitos para: " + ramo.nombre);
+        }
       });
+
       divSemestre.appendChild(divRamo);
     });
+
     contenedor.appendChild(divSemestre);
   }
   actualizarEstadoRamos();
+  crearJeringas();
 }
 
-// ------------------- Jeringas -------------------
-const jeringasCanvas = document.getElementById("jeringas-canvas");
-const jctx = jeringasCanvas.getContext("2d");
-let jeringas = [];
-function iniciarJeringas() {
-  jeringasCanvas.width = window.innerWidth;
-  jeringasCanvas.height = window.innerHeight;
-  for (let i = 0; i < 100; i++) {
-    jeringas.push({
-      x: Math.random() * jeringasCanvas.width,
-      y: Math.random() * jeringasCanvas.height,
-      dy: 0.5 + Math.random() * 1.5,
-      size: 20 + Math.random() * 15
-    });
+function crearJeringas() {
+  const cantidad = 100;
+  for (let i = 0; i < cantidad; i++) {
+    const jeringa = document.createElement("div");
+    jeringa.className = "jeringa";
+    jeringa.style.left = Math.random() * window.innerWidth + "px";
+    jeringa.style.top = Math.random() * window.innerHeight + "px";
+    jeringa.style.animation = `caer ${3 + Math.random()*5}s linear infinite`;
+    document.body.appendChild(jeringa);
+    jeringas.push(jeringa);
   }
-  animarJeringas();
-}
-function animarJeringas() {
-  jctx.clearRect(0,0,jeringasCanvas.width,jeringasCanvas.height);
-  jctx.font = "20px Times New Roman";
-  jeringas.forEach(j => {
-    jctx.fillText("💉", j.x, j.y);
-    j.y += j.dy;
-    if (j.y > jeringasCanvas.height) j.y = -20;
-  });
-  requestAnimationFrame(animarJeringas);
 }
 
-// ------------------- Celebración -------------------
-const serpentinasCanvas = document.getElementById("serpentinas-canvas");
-const sctx = serpentinasCanvas.getContext("2d");
-let serpentinas = [];
+function checkMallaCompleta() {
+  const totalRamos = Object.values(malla).flat().length;
+  if (aprobados.size === totalRamos) {
+    // Borrar malla
+    document.getElementById("malla-container").remove();
+    document.querySelectorAll('.jeringa').forEach(j => j.remove());
 
-function mostrarCelebracion() {
-  // Borrar malla
-  document.getElementById("malla-container").innerHTML = "";
-  document.body.style.backgroundColor = "#b3d9ff";
-  document.getElementById("felicitaciones").style.display = "block";
-
-  serpentinasCanvas.width = window.innerWidth;
-  serpentinasCanvas.height = window.innerHeight;
-
-  for (let i = 0; i < 200; i++) {
-    serpentinas.push({
-      x: Math.random() * window.innerWidth,
-      y: -Math.random() * window.innerHeight,
-      dy: 2 + Math.random() * 3,
-      color: `hsl(${Math.random()*360}, 100%, 50%)`,
-      width: 5 + Math.random() * 5,
-      height: 15 + Math.random() * 10
-    });
+    // Mostrar felicitaciones y serpentinas
+    const fel = document.getElementById("felicitaciones");
+    fel.classList.remove("hidden");
+    crearSerpentinas();
   }
-  animarSerpentinas();
 }
 
-function animarSerpentinas() {
-  sctx.clearRect(0,0,serpentinasCanvas.width,serpentinasCanvas.height);
-  serpentinas.forEach(s => {
-    sctx.fillStyle = s.color;
-    sctx.fillRect(s.x, s.y, s.width, s.height);
-    s.y += s.dy;
-    if (s.y > serpentinasCanvas.height/2) s.y = serpentinasCanvas.height/2;
-  });
-  requestAnimationFrame(animarSerpentinas);
+function crearSerpentinas() {
+  const cantidad = 150;
+  const alturaMax = window.innerHeight/2;
+  for (let i = 0; i < cantidad; i++) {
+    const s = document.createElement("div");
+    s.className = "serpentina";
+    s.style.left = Math.random()*window.innerWidth + "px";
+    s.style.top = -50 + "px";
+    s.style.backgroundColor = `hsl(${Math.random()*360}, 100%, 50%)`;
+    document.body.appendChild(s);
+
+    let pos = -50;
+    const velocidad = 2 + Math.random()*3;
+    const int = setInterval(() => {
+      pos += velocidad;
+      s.style.top = pos + "px";
+      if(pos >= alturaMax) clearInterval(int);
+    }, 16);
+  }
 }
 
-// ------------------- Inicio -------------------
-document.addEventListener("DOMContentLoaded", () => {
-  crearMallaInteractiva();
-  iniciarJeringas();
-});
+document.addEventListener("DOMContentLoaded", crearMallaInteractiva);
