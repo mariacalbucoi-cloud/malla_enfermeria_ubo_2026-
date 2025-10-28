@@ -1,14 +1,17 @@
+/* Reset básico */
 html, body {
   margin: 0;
   padding: 0;
   width: 100%;
   height: 100%;
   font-family: "Times New Roman", serif;
-  background-color: #b3d9ff;
-  color: #31708e;
+  background-color: #b3d9ff; /* celeste pastel */
   overflow-x: hidden;
+  position: relative;
+  color: #31708e;
 }
 
+/* Header */
 header {
   width: 100%;
   padding: 1rem 0;
@@ -27,13 +30,17 @@ header p {
   color: #31708e;
 }
 
+/* Contenedor principal */
 #malla-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   padding: 1rem;
+  position: relative;
+  z-index: 1;
 }
 
+/* Semestres */
 .semestre {
   border: 2px solid #9dcde1;
   padding: 1rem;
@@ -43,6 +50,7 @@ header p {
   background-color: #d9ecff;
 }
 
+/* Asignaturas */
 .ramo {
   cursor: pointer;
   margin-bottom: 8px;
@@ -53,26 +61,26 @@ header p {
   color: #1e3d59;
   user-select: none;
   transition: background-color 0.3s ease, border-color 0.3s ease;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 }
 
+/* Estado aprobado */
 .ramo.aprobado {
   background-color: #c1e8c1;
   border-color: #4caf50;
 }
 
+/* Estado bloqueado */
 .ramo.bloqueado {
   background-color: #d3d3d3;
-  border-color: #a0a0a0;
+  border-color: #a9a9a9;
 }
 
+/* Candado junto al nombre */
 .ramo.bloqueado::after {
-  content: "🔒";
-  margin-left: 6px;
+  content: " 🔒";
 }
 
+/* Footer */
 footer {
   text-align: center;
   padding: 1rem 0;
@@ -81,26 +89,56 @@ footer {
   background-color: #d9ecff;
   border-top: 1px solid #9dcde1;
   margin-top: 2rem;
+  position: relative;
+  z-index: 1;
 }
 
-#jeringas-canvas, #serpentinas-canvas {
+/* Fondo de jeringas */
+.jeringa {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  background-image: url('https://em-content.zobj.net/source/noto-emoji-symbols/344/syringe_1f489.png');
+  background-size: cover;
+  opacity: 0.5;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Felicitaciones */
+#felicitaciones {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  pointer-events: none;
-  z-index: -1;
+  background-color: #b3d9ff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 10;
 }
 
-#felicitaciones {
-  display: none;
-  position: fixed;
-  top: 40%;
-  width: 100%;
+#felicitaciones h1 {
+  font-size: 4rem;
+  color: #2f4f6f;
   text-align: center;
-  font-size: 3rem;
-  font-weight: bold;
-  color: #004080;
-  z-index: 1000;
+  margin: 0;
+}
+
+.hidden {
+  display: none;
+}
+
+/* Serpentinas */
+.serpentina {
+  position: absolute;
+  width: 10px;
+  height: 50px;
+  background-color: red;
+  opacity: 0.7;
+  transform: rotate(0deg);
+  z-index: 11;
+  border-radius: 2px;
 }
