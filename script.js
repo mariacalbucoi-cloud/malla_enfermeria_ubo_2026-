@@ -1,3 +1,6 @@
+// ----------------------
+// Malla completa
+// ----------------------
 const malla = {
   "Primer semestre": [
     { nombre: "Fundamentos de Biología y Genética Humana" },
@@ -62,13 +65,18 @@ const malla = {
     { nombre: "Práctica Integrada en Enfermería VIII", prerequisitos: ["Práctica Integrada en Enfermería VII","Gestión del Cuidado en la Infancia y Adolescencia I"] }
   ],
   "Noveno semestre": [
-    { nombre: "Práctica Profesional en Enfermería I", prerequisitos: ["Práctica Integrada en Enfermería VIII"] }
+    { nombre: "Intervención de Enfermería en Salud Comunitaria", prerequisitos: ["Práctica Integrada en Enfermería VIII"] },
+    { nombre: "Enfermería en Salud Familiar", prerequisitos: ["Práctica Integrada en Enfermería VIII"] },
+    { nombre: "Práctica Profesional en Enfermería Hospitalaria", prerequisitos: ["Práctica Integrada en Enfermería VIII"] }
   ],
   "Décimo semestre": [
-    { nombre: "Práctica Profesional en Enfermería II", prerequisitos: ["Práctica Integrada en Enfermería VIII"] }
+    { nombre: "Práctica Profesional en Enfermería en Atención Primaria de Salud", prerequisitos: ["Intervención de Enfermería en Salud Comunitaria","Enfermería en Salud Familiar"] }
   ]
 };
 
+// ----------------------
+// Funciones de interacción
+// ----------------------
 const aprobados = new Set();
 
 function puedeDesbloquear(prerequisitos) {
@@ -76,73 +84,69 @@ function puedeDesbloquear(prerequisitos) {
 }
 
 function actualizarEstadoRamos() {
-  document.querySelectorAll('.ramo').forEach(divRamo => {
-    const nombre = divRamo.dataset.nombre;
-    const prerequisitos = JSON.parse(divRamo.dataset.prerequisitos || '[]');
+  document.querySelectorAll(".ramo").forEach(r => {
+    const nombre = r.dataset.nombre;
+    const prerequisitos = JSON.parse(r.dataset.prerequisitos || "[]");
     if (aprobados.has(nombre)) {
-      divRamo.classList.remove('bloqueado');
-      divRamo.classList.add('aprobado');
+      r.classList.remove("bloqueado");
+      r.classList.add("aprobado");
     } else if (puedeDesbloquear(prerequisitos)) {
-      divRamo.classList.remove('bloqueado');
-      divRamo.classList.remove('aprobado');
+      r.classList.remove("bloqueado");
+      r.classList.remove("aprobado");
     } else {
-      divRamo.classList.add('bloqueado');
-      divRamo.classList.remove('aprobado');
+      r.classList.add("bloqueado");
+      r.classList.remove("aprobado");
     }
   });
 }
 
-function crearMallaInteractiva() {
-  const contenedor = document.getElementById("malla-container");
-  contenedor.innerHTML = "";
+function crearMalla() {
+  const cont = document.getElementById("malla-container");
+  cont.innerHTML = "";
 
-  for (const [semestre, ramos] of Object.entries(malla)) {
-    const divSemestre = document.createElement("div");
-    divSemestre.className = "semestre";
-    divSemestre.innerHTML = `<h2>${semestre}</h2>`;
-
-    ramos.forEach(ramo => {
-      const divRamo = document.createElement("div");
-      divRamo.className = "ramo bloqueado";
-      divRamo.textContent = ramo.nombre;
-      divRamo.dataset.nombre = ramo.nombre;
-      divRamo.dataset.prerequisitos = JSON.stringify(ramo.prerequisitos || []);
-
-      divRamo.addEventListener("click", () => {
-        if (puedeDesbloquear(ramo.prerequisitos)) {
-          if (aprobados.has(ramo.nombre)) {
-            aprobados.delete(ramo.nombre);
-          } else {
-            aprobados.add(ramo.nombre);
-          }
+  for (const [sem, ramos] of Object.entries(malla)) {
+    const dSem = document.createElement("div");
+    dSem.className = "semestre";
+    dSem.innerHTML = `<h2>${sem}</h2>`;
+    ramos.forEach(r => {
+      const div = document.createElement("div");
+      div.className = "ramo bloqueado";
+      div.textContent = r.nombre;
+      div.dataset.nombre = r.nombre;
+      div.dataset.prerequisitos = JSON.stringify(r.prerequisitos || []);
+      div.addEventListener("click", () => {
+        if (puedeDesbloquear(r.prerequisitos)) {
+          if (aprobados.has(r.nombre)) aprobados.delete(r.nombre);
+          else aprobados.add(r.nombre);
           actualizarEstadoRamos();
         } else {
-          alert("Aún no cumples con los prerrequisitos para: " + ramo.nombre);
+          alert("Aún no cumples con los prerrequisitos para: " + r.nombre);
         }
       });
-
-      divSemestre.appendChild(divRamo);
+      dSem.appendChild(div);
     });
-
-    contenedor.appendChild(divSemestre);
+    cont.appendChild(dSem);
   }
+
   actualizarEstadoRamos();
   crearJeringas();
 }
 
-// Jeringas flotantes
+// ----------------------
+// Fondo de jeringas flotando
+// ----------------------
 function crearJeringas() {
-  const num = 100;
-  for(let i=0; i<num; i++){
-    const j = document.createElement('div');
+  const total = 80;
+  for (let i = 0; i < total; i++) {
+    const j = document.createElement("div");
     j.textContent = "💉";
     j.className = "jeringa";
-    j.style.left = Math.random()*window.innerWidth + "px";
-    j.style.top = Math.random()*window.innerHeight + "px";
-    j.style.fontSize = (10+Math.random()*20) + "px";
-    j.style.animationDuration = (10+Math.random()*20) + "s";
+    j.style.left = Math.random() * window.innerWidth + "px";
+    j.style.top = Math.random() * window.innerHeight + "px";
+    j.style.fontSize = 14 + Math.random() * 18 + "px";
+    j.style.animationDuration = 10 + Math.random() * 25 + "s";
     document.body.appendChild(j);
   }
 }
 
-document.addEventListener("DOMContentLoaded", crearMallaInteractiva);
+document.addEventListener("DOMContentLoaded", crearMalla);
