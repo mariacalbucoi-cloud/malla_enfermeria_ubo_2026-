@@ -65,9 +65,11 @@ const malla = {
     { nombre: "Práctica Integrada en Enfermería VIII", prerequisitos: ["Práctica Integrada en Enfermería VII", "Gestión del Cuidado en la Infancia y Adolescencia I"] }
   ],
   "Noveno semestre": [
-    { nombre: "Intervención de Enfermería en Salud Comunitaria", prerequisitos: [] },
-    { nombre: "Enfermería en Salud Familiar", prerequisitos: [] },
-    { nombre: "Práctica Profesional en Enfermería Hospitalaria", prerequisitos: [] }
+    { nombre: "Intervención de Enfermería en Salud Comunitaria", prerequisitos: ["todas las anteriores"] },
+    { nombre: "Enfermería en Salud Familiar", prerequisitos: ["todas las anteriores"] },
+    { nombre: "Cudados de Enfermería en Adulto Crítico", prerequisitos: ["todas las anteriores"] },
+    { nombre: "Enfermería en Unidades Quirúrgicas del Adulto", prerequisitos: ["todas las anteriores"] },
+    { nombre: "Práctica Profesional en Enfermería Hospitalaria", prerequisitos: ["todas las anteriores"] }
   ],
   "Décimo semestre": [
     { nombre: "Práctica Profesional en Enfermería en Atención Primaria de Salud", prerequisitos: ["Intervención de Enfermería en Salud Comunitaria", "Enfermería en Salud Familiar"] }
