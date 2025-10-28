@@ -1,60 +1,35 @@
 body {
   font-family: 'Poppins', sans-serif;
-  background-color: #cce9f9;
-  color: #222;
+  background-color: #e6f4ff;
   margin: 0;
   padding: 0;
   overflow-x: hidden;
 }
 
-/* Fondo con jeringas flotando */
-.emoji-background {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  z-index: -1;
-}
-
-.emoji {
-  position: absolute;
-  font-size: 1.8rem;
-  opacity: 0.7;
-  animation: flotar 10s linear infinite;
-}
-
-@keyframes flotar {
-  from {
-    transform: translateY(100vh);
-    opacity: 0.8;
-  }
-  to {
-    transform: translateY(-10vh);
-    opacity: 0.1;
-  }
-}
-
-.titulo {
+h1 {
   text-align: center;
   margin-top: 20px;
-  font-size: 2rem;
-  color: #004080;
+  color: #004b8d;
 }
 
-#malla {
+.instrucciones {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.malla {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 20px;
   padding: 20px;
 }
 
 .semestre {
-  background: white;
-  border-radius: 15px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   padding: 15px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s;
 }
 
@@ -65,31 +40,60 @@ body {
 .semestre h2 {
   text-align: center;
   color: #007acc;
-  font-size: 1.3rem;
+  margin-bottom: 10px;
 }
 
 .asignatura {
-  background: #f0f0f0;
+  background: #f9f9f9;
   border-radius: 10px;
   padding: 10px;
-  margin: 6px 0;
+  margin: 5px 0;
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s;
+  position: relative;
+  transition: background 0.3s;
 }
 
-.asignatura:hover {
-  transform: scale(1.03);
-}
-
-.asignatura.aprobada {
-  background-color: #a8e6a1;
-}
-
-.asignatura.bloqueada {
-  background-color: #d3d3d3;
+.asignatura.locked {
+  background: #d3d3d3;
   cursor: not-allowed;
 }
 
-.asignatura.bloqueada::after {
-  content: " 🔒";
+.asignatura.locked::after {
+  content: "🔒";
+  position: absolute;
+  right: 10px;
+}
+
+.asignatura.unlocked:hover {
+  background: #cce5ff;
+}
+
+.asignatura.completed {
+  background: #b2f2bb;
+}
+
+.background-emojis {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.background-emojis span {
+  position: absolute;
+  font-size: 2rem;
+  animation: float 15s linear infinite;
+  opacity: 0.7;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(100vh) rotate(0deg);
+  }
+  100% {
+    transform: translateY(-10vh) rotate(360deg);
+  }
 }
